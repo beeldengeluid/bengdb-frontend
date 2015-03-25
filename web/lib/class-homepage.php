@@ -4,10 +4,5 @@ class Homepage extends Page {
 
     function __construct() {
         parent::__construct();
-        $this->featured = $this->getFeatured();
-    }
-
-    private function getFeatured() {
-        return Config::$featuredContent;
     }
 }

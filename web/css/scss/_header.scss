@@ -1,8 +1,8 @@
 .header-logotype {
-    font-family: $font-headers;
-    color: $bootstrap-blue;
+    font-family: $font-family-title;
+    color: color(flatblue);
     letter-spacing: 1px;
-    border-bottom: 3px double $bootstrap-blue;
+    border-bottom: 3px double color(flatblue);
     padding-bottom: 5px;
 }
 
@@ -37,7 +37,7 @@
     height: 250px;
     border: 5px solid white;
     margin-top: 30px;
-    background-color: $bootstrap-blue;
+    background-color: color(flatblue);
 }
 
 .header-image-text {

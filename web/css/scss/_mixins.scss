@@ -5,3 +5,23 @@
     background-color: black;
     overflow: hidden;
 }
+
+// Some fonts need font smoothing while others do not
+@mixin font-body {
+    font-family: $font-family-body;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-title {
+    font-family: $font-family-title;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-alt {
+    font-family : $font-family-alt;
+    -webkit-font-smoothing: auto;
+}
+
+@function color($color) {
+    @return map-get($colors, $color);
+}

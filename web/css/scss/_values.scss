@@ -1,2 +1,21 @@
-$bootstrap-blue: #337ab7;
-$font-headers: 'Palatino', 'Times New Roman', serif;
+$colors: (
+    flatblue   : #008ce6,
+    ocean      : #009fda,
+    paleblue   : #4caeed,
+    coal       : #1e1e1e,
+    raven      : #292929,
+    metal      : #414141,
+    crapwash   : #e2e2e2,
+    washed     : #f2f2f2,
+    elephant   : #c2c2c2,
+    dove       : #C7C2BA,
+    wolf       : #969696,
+    firetruck  : #e00034,
+    sunflower  : #fce300,
+    carrot     : #ff5800,
+    basil      : #92d400
+);
+
+$font-family-body: 'freight-sans-pro', Helvetica Neue, Arial, sans-serif !default;
+$font-family-title: 'akzidenz-grotesk-condensed', Helvetica Neue, Arial, sans-serif !default;
+$font-family-alt: Verdana, Arial, sans-serif !default;

@@ -5,11 +5,12 @@
 
     <p class="lead">
         {% if errorCode == 500 %}
-            Something went wrong when trying to load this page. This is not your fault.
+            Er ging iets fout met het laden van deze pagina. Dat is niet jouw fout.
         {% elseif errorCode == 404 %}
-            The page could not be found.
+            <img src="{{root}}img/barrie.gif">
+            Deze pagina kan niet worden gevonden.
         {% else %}
-            An error occured that we can't really pinpoint. Sorry about that.
+            Er ging iets fout, maar we weten niet wat. Sorry, dat is het beste wat we er van kunnen maken.
         {% endif %}
     </p>
 </div>

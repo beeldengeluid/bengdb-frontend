@@ -9,7 +9,7 @@ class Page {
         $this->root = ROOT;
         $this->version = VERSION;
         $this->settings = new Settings();
-        $this->title = "The Sum of All Knowledge";
+        $this->title = "BengDB";
         $this->fullurl = $this->root;
         $this->langcodes = $this->getLangCodes();
         $this->langcodesPrimary = [];

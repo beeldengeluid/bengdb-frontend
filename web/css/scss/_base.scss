@@ -11,14 +11,6 @@ html, body, .full-screen {
     height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: $font-headers;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
 .container-fill-home {
     height: calc(100% - 50px);
 }
