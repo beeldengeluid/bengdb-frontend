@@ -4,10 +4,22 @@ use \Httpful\Request;
 class Item extends Page  {
     private $qid, $pagetype;
 
-    function __construct($qid) {
+    function __construct($id, $type) {
         parent::__construct();
-        $this->fullurl = sprintf("%s/%s", $this->root, $qid);
-        $this->qid = $qid;
+        $this->fullurl = sprintf("%s/%s", $this->root, $id);
+
+        if ($type == "wikidata") {
+            $this->qid = $id;
+        } else {
+            $qid = GtaaSearch::lookupCombined($id);
+
+            if (!$qid) {
+                throw new Exception("Non-matched GTAA id", 404);
+            }
+
+            $this->qid = $qid;
+        }
+
         $this->wditem = new WikidataItem($this->qid, $this->lang);
         $this->item = $this->wditem->getItemData();
 

@@ -1,24 +1,5 @@
 <?php
-    define('ABSPATH', dirname(__FILE__));
-
-    if (!file_exists(ABSPATH . '/config.php')) {
-        die("Please create a config.php file. Use config-sample.php as an example.");
-    }
-
-    require 'config.php';
-    require 'version.php';
-    require 'vendor/autoload.php';
-    require 'lib/class-properties.php';
-    require 'lib/class-settings.php';
-    require 'lib/class-items.php';
-    require 'lib/class-page.php';
-    require 'lib/class-wikidataitem.php';
-    require 'lib/class-wikipediaarticle.php';
-    require 'lib/class-wikidatasearch.php';
-    require 'lib/class-wikidataquery.php';
-    require 'lib/class-item.php';
-    require 'lib/class-searchresult.php';
-    require 'lib/class-homepage.php';
+    require 'bootstrap.php';
 
     $app = new \Slim\Slim();
 
@@ -46,12 +27,13 @@
 
         // Check for Q items
         if (strtolower($id[0]) == "q") {
-            // FIXME: why do we need PATH here?
-            $app->redirect(PATH . "/" . substr($id, 1));
+            $type = "wikidata";
+        } else {
+            $type = "gtaa";
         }
 
         try {
-            $item = new Item($id);
+            $item = new Item($id, $type);
         } catch (Exception $e) {
             if (DEBUG) {
                 throw $e;
@@ -85,10 +67,6 @@
         }
     });
 
-    // Redirect old urls
-    $app->get("/:type/:id", function($type, $id) use ($app) {
-        $app->redirect(PATH . "/$id", 301);
-    });
 
     $app->get("/:id.json", function($id) use ($app) {
         $app->response->headers->set('Content-Type', 'application/json');

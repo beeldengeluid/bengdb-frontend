@@ -1,6 +1,6 @@
 .navbar-inverse {
-    background-color: rgba(51,122,183, 0.9);
-    border-color: color(flatblue);
+    background-color: $primary;
+    border-color: $primary;
     margin-bottom: 0;
 
     .navbar-brand {
@@ -13,7 +13,7 @@
     }
 
     .btn .glyphicon {
-        color: color(flatblue);
+        color: $primary;
     }
 }
 

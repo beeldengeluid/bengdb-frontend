@@ -16,6 +16,9 @@ $colors: (
     basil      : #92d400
 );
 
+$primary: map-get($colors, firetruck);
+$secondary: map-get($colors, flatblue);
+
 $font-family-body: 'freight-sans-pro', Helvetica Neue, Arial, sans-serif !default;
 $font-family-title: 'akzidenz-grotesk-condensed', Helvetica Neue, Arial, sans-serif !default;
 $font-family-alt: Verdana, Arial, sans-serif !default;

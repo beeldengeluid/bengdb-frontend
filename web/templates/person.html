@@ -61,10 +61,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="text-center">Works with or by {{item.labels}}</h2>
+                <h2 class="text-center">Werken door of met {{item.labels}}</h2>
 
                 {% for work in item.works %}
-                <a class="col-md-3" href="work/{{work.id}}">
+                <a class="col-md-3" href="{{work.id}}">
                     <span class="media-grid-thumb" style="background-image:url('{{work.image.thumb}}')"></span>
 
                     <h3>

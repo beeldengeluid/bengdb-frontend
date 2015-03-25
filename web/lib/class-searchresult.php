@@ -5,7 +5,7 @@ class SearchResult extends Page {
     function __construct($q) {
         parent::__construct();
         $this->q = $q;
-        $searchresults = new WikidataSearch($q, $this->lang);
+        $searchresults = new GtaaSearch($q);
         $this->isSearch = true;
         $this->searchresults = $searchresults->getResultData();
     }

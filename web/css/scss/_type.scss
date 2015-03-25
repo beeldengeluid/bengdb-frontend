@@ -12,7 +12,7 @@ p, li {
 }
 
 a {
-    color: color(flatblue);
+    color: $secondary;
 
     &:hover {
         text-decoration: none;

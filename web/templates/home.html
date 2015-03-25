@@ -44,8 +44,8 @@
                     {% for item in searchresults %}
                     <li class="buffer-bottom-1">
                         <a href="{{item.id}}">
-                            <strong>{{item.label}}</strong><br />
-                            {{item.description}}
+                            <strong>{{ item.label | join(', ') }}</strong><br />
+                            {{item.scopeNote | join(', ') }}
                         </a>
                     </li>
                     {% endfor %}
