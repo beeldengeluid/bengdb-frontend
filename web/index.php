@@ -24,18 +24,24 @@
         $app->stop();
     }
 
-    function renderPage($id, $format = "html") {
-        global $app, $renderer;
-
+    function getItem($id) {
         // Check for Q items
         if (strtolower($id[0]) == "q") {
             $type = "wikidata";
-        } else {
+        } else if (ctype_digit($id)) {
             $type = "gtaa";
+        } else {
+            throw new Exception("Invalid ID", 400);
         }
 
+        return new Item($id, $type);
+    }
+
+    function renderPage($id, $format = "html") {
+        global $app, $renderer;
+
         try {
-            $item = new Item($id, $type);
+            $item = getItem($id);
         } catch (Exception $e) {
             if (DEBUG) {
                 throw $e;
