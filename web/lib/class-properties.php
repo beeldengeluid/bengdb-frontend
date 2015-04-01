@@ -17,6 +17,7 @@ class Properties {
     const PLACEOFDEATH = "P20";
     const DATEOFBIRTH = "P569";
     const DATEOFDEATH = "P570";
+    const CAUSEOFDEATH = "P509";
     const OCCUPATION = "P106";
     const LOCATION = "P625";
     const TERRITORY = "P131";
@@ -27,6 +28,7 @@ class Properties {
     const CHILD = "P40";
     const SPOUSE = "P26";
     const AUTHOR = "P50";
+    const EMPLOYER = "P108";
 
     public static $work = [
         "location" => self::LOCATION,
@@ -50,7 +52,10 @@ class Properties {
         "dateOfDeath" => self::DATEOFDEATH,
         "country" => self::COUNTRY,
         "child" => self::CHILD,
-        "spouse" => self::SPOUSE
+        "spouse" => self::SPOUSE,
+        "occupation" => self::OCCUPATION,
+        "causeOfDeath" => self::CAUSEOFDEATH,
+        "employer" => self::EMPLOYER
     ];
 
     public static $creator = [

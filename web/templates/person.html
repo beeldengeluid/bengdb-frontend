@@ -23,33 +23,74 @@
                     <h1>{{item.labels}}</h1>
 
                     <h3 class="text-muted">
-                        {% if item.placeOfBirth %}
-                            <a href="{{item.placeOfBirth[0].id}}">
-                                {{item.placeOfBirth[0].label}}
-                            </a>
-                        {% endif %}
-
                         {% if item.dateOfBirth %}
-                            {{item.dateOfBirth[0].year}}
+                            Geboren
+                            {% for d in item.dateOfBirth %}
+                                {{ [d.day, d.month, d.year] | join('-') }}
+                            {% endfor %}
                         {% endif %}
 
-                        {% if item.placeOfDeath %}
-                            -
+                        {% if item.placeOfBirth %}
+                            {% if item.dateOfBirth %}
+                                te
+                            {% endif %}
 
-                            <a href="{{item.placeOfDeath[0].id}}">
-                                {{item.placeOfDeath[0].label}}
-                            </a>
+                            {{item.placeOfBirth[0].label}}
                         {% endif %}
 
                         {% if item.dateOfDeath %}
-                            {{item.dateOfDeath[0].year}}
+                            {% if item.dateOfBirth %}
+                                , gestorven
+                            {% else %}
+                                Gestorven
+                            {% endif %}
+
+                            {% for d in item.dateOfDeath %}
+                                {{ [d.day, d.month, d.year] | join('-') }}
+                            {% endfor %}
+
+                            {% if item.causeOfDeath %}
+                            (door {{item.causeOfDeath[0].label}})
+                            {% endif %}
+                        {% endif %}
+
+                        {% if item.placeOfDeath %}
+                            {% if item.dateOfDeath %}
+                                te
+                            {% endif %}
+
+                            {{item.placeOfDeath[0].label}}
                         {% endif %}
                     </h3>
 
                     <p class="lead">{{item.descriptions}}</p>
 
+                    {% if item.occupation %}
+                        <h4>Rollen</h4>
+                        <ul class="list-inline">
+                        {% for item in item.occupation %}
+                        <li>{{item.label}}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% if item.employer %}
+                        <h4>Werkgevers</h4>
+                        <ul class="list-inline">
+                            {% for item in item.employer %}
+                            <li>{{item.label}}</li>
+                            {% endfor %}
+                            </ul>
+                        </ul>
+                    {% endif %}
+
                     {{ macros.itemprop("Kind(eren)", item.child) }}
                     {{ macros.itemprop("Partner(s)", item.spouse) }}
+
+                    {% if item.aliases %}
+                        <h4>Ook bekend als:</h4>
+                        <p>{{ item.aliases | join(', ') }}</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
