@@ -6,8 +6,10 @@
     <p class="lead">
         {% if errorCode == 500 %}
             Er ging iets fout met het laden van deze pagina. Dat is niet jouw fout.
+        {% elseif errorCode == 400 %}
+            Er klopt iets niet met je URL. Check of het wel klopt.
         {% elseif errorCode == 404 %}
-            <img src="{{root}}/img/barrie.gif">
+            <img src="{{root}}/img/barrie.gif"><br>
             Deze pagina kan niet worden gevonden.
         {% else %}
             Er ging iets fout, maar we weten niet wat. Sorry, dat is het beste wat we er van kunnen maken.

@@ -7,6 +7,10 @@ class Page {
 
     function __construct() {
         $this->root = ROOT;
+
+        // Ah, really, for f... sake
+        $this->rootSlashed = substr(ROOT, -1) == "/" ? ROOT : ROOT . "/";
+
         $this->version = VERSION;
         $this->settings = new Settings();
         $this->title = "BengDB";
