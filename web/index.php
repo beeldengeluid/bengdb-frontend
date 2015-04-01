@@ -1,7 +1,9 @@
 <?php
     require 'bootstrap.php';
 
-    $app = new \Slim\Slim();
+    $app = new \Slim\Slim([
+        'debug' => DEBUG
+    ]);
 
     function render($template, $obj) {
         global $app;

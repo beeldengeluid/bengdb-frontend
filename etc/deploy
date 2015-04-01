@@ -1,6 +1,6 @@
 #!/bin/bash
-rsync -avz --exclude "config.php" --exclude ".git" --exclude ".sass-cache" ../web/* eldon:/var/www/bengdb/web/
+rsync -avz --exclude "config.php" --exclude ".git" --exclude ".sass-cache" ../web/* www-data@eldon:/var/www/bengdb/web/
 
-ssh eldon <<'ENDSSH'
-sudo rm -rf /var/www/bengdb/web/cache/*
+ssh www-data@eldon <<'ENDSSH'
+rm -rf /var/www/bengdb/web/cache/*
 ENDSSH

@@ -4,6 +4,7 @@ use \Httpful\Request;
 class GtaaSearch {
     const GTAA_SEARCH_ENDPOINT = "%s/gtaa/findconcepts?q=%s&scheme=Makers";
     const GTAA_LOOKUPCOMBINED_ENDPOINT = "%s/gtaa/lookupcombined?q=%s";
+    const GTAA_LISTCOMBINED = "%s/gtaa/listcombined";
 
     private $query, $result;
 
@@ -21,6 +22,12 @@ class GtaaSearch {
         $req = Request::get($url)->send();
 
         return $req->body->response ? $req->body->response->wikidata : false;
+    }
+
+    public static function listCombined() {
+        $url = sprintf(self::GTAA_LISTCOMBINED, API_ENDPOINT);
+        $req = Request::get($url)->send();
+        return $req->body->response;
     }
 
     private function getResult() {

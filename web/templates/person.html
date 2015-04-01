@@ -56,28 +56,30 @@
     </div>
 </div>
 
-{% if item.works %}
-<div class="bg-light bg-spaced media-grid">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center">Werken door of met {{item.labels}}</h2>
+{# So why has Mies Bouwman written the Koran? Weird stuf...
+    {% if item.works %}
+    <div class="bg-light bg-spaced media-grid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center">Werken door of met {{item.labels}}</h2>
 
-                {% for work in item.works %}
-                <a class="col-md-3" href="{{work.id}}">
-                    <span class="media-grid-thumb" style="background-image:url('{{work.image.thumb}}')"></span>
+                    {% for work in item.works %}
+                    <a class="col-md-3" href="{{work.id}}">
+                        <span class="media-grid-thumb" style="background-image:url('{{work.image.thumb}}')"></span>
 
-                    <h3>
-                        {{work.labels}}
-                        {{work.year}}
-                    </h3>
-                </a>
-                {% endfor %}
+                        <h3>
+                            {{work.labels}}
+                            {{work.year}}
+                        </h3>
+                    </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endif %}
+    {% endif %}
+#}
 
 {% include 'wikipedia-article.html' %}
 {% include 'navbar-footer.html' %}

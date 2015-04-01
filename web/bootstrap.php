@@ -10,7 +10,7 @@
     require ABSPATH . '/vendor/autoload.php';
 
     spl_autoload_register(function ($name) {
-        $filename = ABSPATH . "/lib/class-$name.php";
+        $filename = ABSPATH . strtolower("/lib/class-$name.php");
 
         if (!file_exists($filename)) {
             throw new Exception("Could not find class $name");

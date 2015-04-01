@@ -6,6 +6,10 @@
     outline: none !important;
 }
 
+.collist {
+    @include column-count(4);
+}
+
 html, body, .full-screen {
     width: 100%;
     height: 100%;

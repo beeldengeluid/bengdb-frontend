@@ -11,7 +11,9 @@
                 De Beeld en Geluid Database (BengDB) is een visueel aantrekkelijke en functioneel doorzoekbare database van de personen uit de Nederlandse televisiegeschiedenis (zowel voor als achter de schermen), gebaseerd op de GTAA-thesaurus van Beeld en Geluid, aangevuld met data uit Wikidata, Wikipedia, de Beeld en Geluid wiki en andere (open) bronnen.
             </p>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <form method="get" action="{{root}}" class="buffer-4">
                 <div class="input-group input-group-lg">
@@ -59,6 +61,24 @@
             {% endif %}
         </div>
     </div>
+
+    {% if not isSearch %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="buffer-top-4 text-center">Alle mensen in de BengDB</h2>
+
+            <ul class="collist">
+            {% for item in allItems %}
+                <li>
+                    <a href="{{item.gtaa}}">
+                        {{item.label}}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 <footer class="container buffer-top-2">
