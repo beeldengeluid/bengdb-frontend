@@ -21,7 +21,7 @@ class GtaaSearch {
         $url = sprintf(self::GTAA_LOOKUPCOMBINED_ENDPOINT, API_ENDPOINT, $gtaaid);
         $req = Request::get($url)->send();
 
-        return $req->body->response ? $req->body->response->wikidata : false;
+        return $req->body->response ? $req->body->response : false;
     }
 
     public static function listCombined() {

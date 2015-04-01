@@ -11,13 +11,17 @@ class Item extends Page  {
         if ($type == "wikidata") {
             $this->qid = $id;
         } else {
-            $qid = GtaaSearch::lookupCombined($id);
+            $gtaadata = GtaaSearch::lookupCombined($id);
 
-            if (!$qid) {
+            if (!$gtaadata) {
                 throw new Exception("Non-matched GTAA id", 404);
             }
 
-            $this->qid = $qid;
+            if ($gtaadata->bengwiki) {
+                $this->bengwikitext = BengWiki::getPagetext($gtaadata->bengwiki);
+            }
+
+            $this->qid = $gtaadata->wikidata;
         }
 
         $this->wditem = new WikidataItem($this->qid, $this->lang);

@@ -1,7 +1,7 @@
 <?php
 // Read / Save settings in a cookie
 class Settings {
-    const COOKIE_ID = "sum-bykr-org";
+    const COOKIE_ID = "bengdb-beeldengeluid-nl";
     const SECONDS_IN_A_YEAR = 31536000;
 
     private $settings, $expires;

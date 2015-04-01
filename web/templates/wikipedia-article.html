@@ -3,7 +3,34 @@
         <div class="row">
             <div class="col-md-8">
                 {% autoescape false %}
-                    {{article.text}}
+                    {% if (not bengwikitext and article.text) %}
+                        <p><em>Deze tekst komt uit Wikipedia.</em></p>
+                        {{article.text}}
+                    {% elseif (bengwikitext and not article.text) %}
+                        <p><em>Deze tekst komt uit de Beeld en Geluid Wiki.</em></p>
+                        {{bengwikitext}}
+                    {% else %}
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active">
+                                    <a href="#tab-wikipedia" data-toggle="tab" role="tab">Wikipedia</a>
+                                </li>
+                                <li>
+                                    <a href="#tab-bengwiki" data-toggle="tab" role="tab">B&amp;G Wiki</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content buffer-top-2">
+                                <div role="tabpanel" class="tab-pane active" id="tab-wikipedia">
+                                    {{article.text}}
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="tab-bengwiki">
+                                    {{bengwikitext}}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endautoescape %}
             </div>
 
