@@ -2,9 +2,9 @@
 use \Httpful\Request;
 
 class GtaaSearch {
-    const GTAA_SEARCH_ENDPOINT = "%s/gtaa/findconcepts?q=%s&scheme=Makers";
-    const GTAA_LOOKUPCOMBINED_ENDPOINT = "%s/gtaa/lookupcombined?q=%s";
+    const GTAA_LOOKUPCOMBINED = "%s/gtaa/lookupcombined?q=%s";
     const GTAA_LISTCOMBINED = "%s/gtaa/listcombined";
+    const GTAA_FINDITEMS = "%s/gtaa/finditems?q=%s";
 
     private $query, $result;
 
@@ -17,10 +17,9 @@ class GtaaSearch {
         return $this->result;
     }
 
-    public static function lookupCombined($gtaaid) {
-        $url = sprintf(self::GTAA_LOOKUPCOMBINED_ENDPOINT, API_ENDPOINT, $gtaaid);
+    public static function lookupCombined($id) {
+        $url = sprintf(self::GTAA_LOOKUPCOMBINED, API_ENDPOINT, $id);
         $req = Request::get($url)->send();
-
         return $req->body->response ? $req->body->response : false;
     }
 
@@ -31,18 +30,8 @@ class GtaaSearch {
     }
 
     private function getResult() {
-        $url = sprintf(self::GTAA_SEARCH_ENDPOINT,
-            API_ENDPOINT,
-            urlencode($this->query)
-        );
-
+        $url = sprintf(self::GTAA_FINDITEMS, API_ENDPOINT, urlencode($this->query));
         $req = Request::get($url)->send();
-
-        if (!$req->body->response) return [];
-
-        // Check if we have matching Wikidata ID's
-        return array_filter($req->body->response, function($match) {
-            return $this->lookupCombined($match->id);
-        });
+        return $req->body->response;
     }
 }

@@ -4,6 +4,5 @@ class Homepage extends Page {
 
     function __construct() {
         parent::__construct();
-        $this->allItems = GtaaSearch::listCombined();
     }
 }

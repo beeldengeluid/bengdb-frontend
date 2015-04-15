@@ -45,9 +45,9 @@
                 <ul class="list-unstyled text-left">
                     {% for item in searchresults %}
                     <li class="buffer-bottom-1">
-                        <a href="{{item.id}}">
-                            <strong>{{ item.label | join(', ') }}</strong><br />
-                            {{item.scopeNote | join(', ') }}
+                        <a href="{{item.gtaa}}">
+                            <strong>{{ item.label}}</strong><br />
+                            {{item.description}}
                         </a>
                     </li>
                     {% endfor %}
@@ -61,24 +61,6 @@
             {% endif %}
         </div>
     </div>
-
-    {% if not isSearch %}
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="buffer-top-4 text-center">Alle mensen in de BengDB</h2>
-
-            <ul class="collist">
-            {% for item in allItems %}
-                <li>
-                    <a href="{{item.gtaa}}">
-                        {{item.label}}
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
-    </div>
-    {% endif %}
 </div>
 
 <footer class="container buffer-top-2">
