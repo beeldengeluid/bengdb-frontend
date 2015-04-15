@@ -9,6 +9,7 @@
     require ABSPATH . '/version.php';
     require ABSPATH . '/vendor/autoload.php';
 
+    // Setup autoloading
     spl_autoload_register(function ($name) {
         $filename = ABSPATH . strtolower("/lib/class-$name.php");
 
@@ -18,3 +19,14 @@
 
         require $filename;
     });
+
+    // Initialize database
+    try {
+        ORM::configure([
+            "connection_string" => sprintf('mysql:host=%s;dbname=%s;charset=utf8;', DB_HOST, DB_DATABASE),
+            "username" => DB_USER,
+            "password" => DB_PASS
+        ]);
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }

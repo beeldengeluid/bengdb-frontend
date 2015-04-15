@@ -4,6 +4,10 @@
     define('API_ENDPOINT', 'http://localhost:5000');
     define('DEFAULT_LANGUAGE', 'nl');
     define('DEBUG', false);
+    define('DB_HOST', 'localhost');
+    define('DB_DATABASE', 'bengdb');
+    define('DB_USER', 'root');
+    define('DB_PASS', 'root');
 
     class Config {
         public static $primaryLanguages = [

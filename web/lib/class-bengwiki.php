@@ -10,6 +10,6 @@ class BengWiki {
     public static function getPagetext($q) {
         $url = sprintf(self::BENGWIKI_ENDPOINT, API_ENDPOINT, "pagetext", $q);
         $req = Request::get($url)->send();
-        return $req->body->response ? $req->body->response : false;
+        return isset($req->body->response) ? $req->body->response : false;
     }
 }
