@@ -65,10 +65,6 @@ html, body, .full-screen {
     }
 }
 
-.img-zoomable {
-    cursor: pointer;
-}
-
 .btn {
     white-space: normal;
 }
@@ -115,3 +111,8 @@ html, body, .full-screen {
     list-style: none;
 }
 
+#swipebox-caption {
+    a, a:hover {
+        color: white;
+    }
+}
