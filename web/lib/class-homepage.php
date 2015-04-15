@@ -4,5 +4,6 @@ class Homepage extends Page {
 
     function __construct() {
         parent::__construct();
+        $this->recentItems = GtaaSearch::getRecentItems();
     }
 }

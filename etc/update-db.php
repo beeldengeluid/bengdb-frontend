@@ -7,7 +7,7 @@
 // 3. Look up those numbers using the Wikidata API
 // 4. Check if they are 'makers', and if so, mark them as such
 // 5. Enter the items in the database
-require '../web/bootstrap.php';
+require dirname(__FILE__) . '/../web/bootstrap.php';
 use \Httpful\Request;
 
 define('WDQ_URL', "http://wdq.wmflabs.org/api?q=CLAIM[1741]");

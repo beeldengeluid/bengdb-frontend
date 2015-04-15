@@ -11,4 +11,8 @@ class GtaaSearch {
         $q = strtolower($q);
         return ORM::for_table('combined')->where_like('lookup', "%$q%")->limit(10)->find_array();
     }
+
+    public static function getRecentItems() {
+        return ORM::for_table('combined')->order_by_desc('id')->limit(10)->find_array();
+    }
 }

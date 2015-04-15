@@ -60,7 +60,26 @@
                 {% endif %}
             {% endif %}
         </div>
+    </div> <!-- Search part -->
+
+    {% if not isSearch %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <h3>Tien meest recent toegevoegde personen</h3>
+
+            <ul class="list-unstyled">
+                {% for item in recentItems %}
+                <li class="buffer-bottom-1">
+                    <a href="{{fullurl}}/{{item.gtaa}}">
+                        <strong>{{item.label}}</strong><br>
+                        {{item.description}}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
+    {% endif %}
 </div>
 
 <footer class="container buffer-top-2">
