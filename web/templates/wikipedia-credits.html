@@ -1,0 +1,13 @@
+{% if item.sitelinks %}
+    <div class="credits">
+    {% if item.sitelinks.nl %}
+        <p><em>
+            Deze tekst is afkomstig uit het artikel <a href="{{item.sitelinks.nl.url}}">{{item.sitelinks.nl.title}}</a> van de <a href="http://nl.wikipedia.org">Nederlandstalige Wikipedia</a>, beschikbaar onder een <a href="http://creativecommons.org/licenses/by-sa/3.0/nl/">Creative Commons Naamsvermelding-Gelijkdelen licentie</a>.
+        </em></p>
+    {% elseif item.sitelinks.en %}
+        <p><em>
+            This articles uses material from the Wikipedia article <a href="{{item.sitelinks.en.url}}">{{item.sitelinks.en.title}}</a>, licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share-Alike License</a>.
+        </em></p>
+    {% endif %}
+    </div>
+{% endif %}

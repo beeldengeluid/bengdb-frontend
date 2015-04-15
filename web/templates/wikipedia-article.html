@@ -6,6 +6,7 @@
                     {% if (not bengwikitext and article.text) %}
                         <p><em>Deze tekst komt uit Wikipedia.</em></p>
                         {{article.text}}
+                        {% include 'wikipedia-credits.html' %}
                     {% elseif (bengwikitext and not article.text) %}
                         <p><em>Deze tekst komt uit de Beeld en Geluid Wiki.</em></p>
                         {{bengwikitext}}
@@ -16,13 +17,14 @@
                                     <a href="#tab-wikipedia" data-toggle="tab" role="tab">Wikipedia</a>
                                 </li>
                                 <li>
-                                    <a href="#tab-bengwiki" data-toggle="tab" role="tab">B&amp;G Wiki</a>
+                                    <a href="#tab-bengwiki" data-toggle="tab" role="tab">Beeld en Geluid wiki</a>
                                 </li>
                             </ul>
 
                             <div class="tab-content buffer-top-2">
                                 <div role="tabpanel" class="tab-pane active" id="tab-wikipedia">
                                     {{article.text}}
+                                    {% include 'wikipedia-credits.html' %}
                                 </div>
 
                                 <div role="tabpanel" class="tab-pane" id="tab-bengwiki">
