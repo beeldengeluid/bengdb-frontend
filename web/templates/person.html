@@ -91,6 +91,18 @@
                         <h4>Ook bekend als:</h4>
                         <p>{{ item.aliases | join(', ') }}</p>
                     {% endif %}
+
+                    {% if linkshere %}
+                        <h4>Gerelateerd aan</h4>
+
+                        <ul>
+                        {% for link in linkshere %}
+                            <li>
+                                {{link.labels}}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>

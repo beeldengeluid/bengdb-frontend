@@ -2,8 +2,8 @@
 use \Httpful\Request;
 
 class GtaaSearch {
-    public static function lookupCombined($id) {
-        $item = ORM::for_table('combined')->where('gtaa', $id)->limit(10)->find_array();
+    public static function lookupCombined($id, $type = "gtaa") {
+        $item = ORM::for_table('combined')->where($type, $id)->limit(10)->find_array();
         return count($item) === 0 ? false : (object) $item[0];
     }
 

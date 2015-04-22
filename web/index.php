@@ -34,6 +34,17 @@
             throw new Exception("Invalid ID", 400);
         }
 
+        // Check if there is a GTAA id associated with this
+        // Wikidata ID, if so, redirect
+        if ($type == "wikidata") {
+
+            $gtaaid = GtaaSearch::lookupCombined($id, "wikidata");
+
+            if ($gtaaid) {
+                throw new Exception(ROOT . "/" . $gtaaid->gtaa, 301);
+            }
+        }
+
         return new Item($id, $type);
     }
 
@@ -44,6 +55,11 @@
             $item = getItem($id);
         } catch (Exception $e) {
             $code = $e->getCode();
+
+            if ($code == 301) {
+                // Specific permanent redirect
+                $app->redirect($e->getMessage());
+            }
 
             if ($code == 302) {
                 // Redirect, try without parameters

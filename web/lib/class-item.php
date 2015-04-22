@@ -25,6 +25,8 @@ class Item extends Page  {
         }
 
         $this->wditem = new WikidataItem($this->qid, $this->lang);
+        $this->wdlinkshere = new WikidataLinkshere($this->qid, $this->lang);
+        $this->linkshere = $this->wdlinkshere->getData();
         $this->item = $this->wditem->getItemData();
         $this->pageType = $this->getPageType();
         $this->addValues();
@@ -43,10 +45,7 @@ class Item extends Page  {
     }
 
     public function getPageType() {
-        if ($this->wditem->hasClaimWhere(Items::$person)) {
-            return 'person';
-        } else {
-            throw new Exception("Invalid pagetype");
-        }
+        // So far, this is the only pagetype
+        return 'person';
     }
 }
