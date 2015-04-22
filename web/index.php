@@ -43,12 +43,19 @@
         try {
             $item = getItem($id);
         } catch (Exception $e) {
+            $code = $e->getCode();
+
+            if ($code == 302) {
+                // Redirect, try without parameters
+                $app->redirect("$id");
+            }
+
             if (DEBUG) {
                 throw $e;
             }
 
             error_log($e->getMessage());
-            $code = $e->getCode();
+
             $page = new Page();
             $page->setErrorCode($code);
 
@@ -74,7 +81,6 @@
             render("home", new Homepage());
         }
     });
-
 
     $app->get("/:id.json", function($id) use ($app) {
         $app->response->headers->set('Content-Type', 'application/json');

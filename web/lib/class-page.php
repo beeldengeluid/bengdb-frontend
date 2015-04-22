@@ -31,16 +31,10 @@ class Page {
     }
 
     private function getLangCodes() {
-        $json = file_get_contents(ABSPATH . '/data/langcodes.json');
-        $langs = json_decode($json);
-        $langcodes = [];
-
-        foreach($langs as $code => $lang) {
-            $parts = explode("(", $lang);
-            $langcodes[$code] = trim($parts[0]);
-        }
-
-        return $langcodes;
+        return [
+            "en" => "English",
+            "nl" => "Nederlands"
+        ];
     }
 
     private function getLanguage() {
@@ -50,6 +44,9 @@ class Page {
             if (array_key_exists($lang, $this->langcodes)) {
                 $this->settings->set("lang", $lang);
                 return $lang;
+            } else {
+                // Redirect to the default URL
+                throw new Exception("Invalid language code", 302);
             }
         }
 
