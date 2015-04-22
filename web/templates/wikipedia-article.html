@@ -4,13 +4,11 @@
             <div class="col-md-8">
                 {% autoescape false %}
                     {% if (not bengwikitext and article.text) %}
-                        <p><em>Deze tekst komt uit Wikipedia.</em></p>
                         {{article.text}}
                         {% include 'wikipedia-credits.html' %}
                     {% elseif (bengwikitext and not article.text) %}
-                        <p><em>Deze tekst komt uit de Beeld en Geluid Wiki.</em></p>
                         {{bengwikitext}}
-                    {% else %}
+                    {% elseif bengwikitext and article.text %}
                         <div role="tabpanel">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="active">

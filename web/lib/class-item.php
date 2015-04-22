@@ -2,7 +2,7 @@
 use \Httpful\Request;
 
 class Item extends Page  {
-    private $qid, $pagetype;
+    private $qid, $pageType;
 
     function __construct($id, $type) {
         parent::__construct();
@@ -26,6 +26,8 @@ class Item extends Page  {
 
         $this->wditem = new WikidataItem($this->qid, $this->lang);
         $this->item = $this->wditem->getItemData();
+        $this->pageType = $this->getPageType();
+        $this->addValues();
 
         if (isset($this->item->sitelinks->{$this->lang})) {
             $title = $this->item->sitelinks->{$this->lang}->title;
@@ -34,8 +36,17 @@ class Item extends Page  {
         }
     }
 
+    private function addValues() {
+        if ($this->pageType === 'person') {
+            $this->wditem->addValues(Properties::$person);
+        }
+    }
+
     public function getPageType() {
-        // Right now, this is always 'person'
-        return 'person';
+        if ($this->wditem->hasClaimWhere(Items::$person)) {
+            return 'person';
+        } else {
+            throw new Exception("Invalid pagetype");
+        }
     }
 }
