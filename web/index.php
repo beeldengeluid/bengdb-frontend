@@ -54,7 +54,15 @@
                 throw $e;
             }
 
-            error_log($e->getMessage());
+            error_log(
+                sprintf(
+                    "[bengdb-frontend] Error at %s(%s): %s (%s)",
+                    $e->getFile(),
+                    $e->getLine(),
+                    $e->getMessage(),
+                    $e->getCode()
+                )
+            );
 
             $page = new Page();
             $page->setErrorCode($code);
