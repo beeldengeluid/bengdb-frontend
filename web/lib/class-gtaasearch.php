@@ -13,6 +13,6 @@ class GtaaSearch {
     }
 
     public static function getRecentItems() {
-        return ORM::for_table('combined')->order_by_desc('id')->limit(10)->find_array();
+        return ORM::for_table('combined')->where('included', 1)->order_by_desc('id')->limit(10)->find_array();
     }
 }
