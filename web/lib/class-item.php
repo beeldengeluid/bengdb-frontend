@@ -36,6 +36,8 @@ class Item extends Page  {
             $article = new WikipediaArticle($title, $this->lang);
             $this->article = $article->getArticleData();
         }
+
+        $this->setTitle($this->item->labels);
     }
 
     private function addValues() {

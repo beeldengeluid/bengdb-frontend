@@ -30,6 +30,10 @@ class Page {
         $this->errorCode = $code;
     }
 
+    public function setTitle($title) {
+        $this->title = $title . " - BengDB";
+    }
+
     private function getLangCodes() {
         return [
             "en" => "English",
