@@ -50,7 +50,10 @@ class Page {
             }
         }
 
-        if ($this->settings->has("lang")) {
+        if (
+            $this->settings->has("lang") &&
+            array_key_exists($this->settings->get("lang"), $this->langcodes)
+        ) {
             return $this->settings->get("lang");
         } else {
             $this->settings->set("lang", DEFAULT_LANGUAGE);
