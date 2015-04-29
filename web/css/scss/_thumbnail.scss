@@ -2,14 +2,23 @@
     &.thumbnail-bg {
         @include wh(100%, 200px);
         @include bg-cover;
+        background-color: black;
         position: relative;
 
         .thumbnail-label {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            @include pos(auto, 10px, 0, 10px);
             padding: 5px;
             background: rgba(255, 255, 255, 0.9);
+
+            // Should really figure out something for non-webkit
+            -webkit-line-clamp: 3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
+        &:hover .thumbnail-label {
+            -webkit-line-clamp: inherit;
         }
     }
 }

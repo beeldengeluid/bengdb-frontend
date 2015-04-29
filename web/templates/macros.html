@@ -33,16 +33,32 @@
     {% endif %}
 {% endmacro %}
 
-{% macro thumblist(list) %}
+{% macro thumblist(list, expanded) %}
     {% if list %}
     <div class="row">
     {% for item in list %}
-        <div class="col-md-3">
-            <a href="{{fulurl}}/{{item.gtaa}}"
+        <div class="col-sm-3">
+            <a href="{{fullurl}}/{{item.gtaa}}"
                class="thumbnail thumbnail-bg"
                style="background-image:url('//commons.wikimedia.org/wiki/Special:Redirect/file/{{item.image}}?width=300')"
             >
-                <h4 class="thumbnail-label">{{item.label}}</h4>
+                {% if expanded %}
+                    <h4 class="thumbnail-label">
+                        {{item.label}}
+
+                        {% if item.birthdate %}
+                        <br><small>
+                        (geb. {{item.birthdate | date("j-n-Y")}})
+                        </small>
+                        {% endif %}
+
+                        {% if item.description %}
+                        <br><small><b>{{item.description}}</b></small>
+                        {% endif %}
+                    </h4>
+                {% else %}
+                    <h4 class="thumbnail-label">{{item.label}}</h4>
+                {% endif %}
             </a>
         </div>
     {% endfor %}

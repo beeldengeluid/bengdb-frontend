@@ -43,16 +43,7 @@
 
             {% if searchresults %}
                 <p>Results for <strong>{{q}}</strong>:</p>
-                <ul class="list-unstyled text-left">
-                    {% for item in searchresults %}
-                    <li class="buffer-bottom-1">
-                        <a href="{{item.gtaa}}">
-                            <strong>{{ item.label}}</strong><br />
-                            {{item.description}}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
+                {{macros.thumblist(searchresults, true)}}
             {% else %}
                 {% if isSearch %}
                     <div class="alert alert-info">

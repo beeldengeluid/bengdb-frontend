@@ -16,11 +16,11 @@ html, body, .full-screen {
 }
 
 .container-fill-home {
-    height: calc(100% - 50px);
+    min-height: calc(100% - 50px);
 }
 
 .container-fill-item {
-    height: calc(100% - 200px);
+    min-height: calc(100% - 200px);
 }
 
 .lead.lead-abstract {

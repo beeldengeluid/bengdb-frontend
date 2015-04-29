@@ -11,7 +11,12 @@ class GtaaSearch {
 
     public static function search($q) {
         $q = strtolower($q);
-        return ORM::for_table(self::TABLE)->where_like('lookup', "%$q%")->limit(10)->find_array();
+
+        return ORM::for_table(self::TABLE)
+            ->where_like('lookup', "%$q%")
+            ->where('included', 1)
+            ->limit(12)
+            ->find_array();
     }
 
     public static function getRecentItems() {

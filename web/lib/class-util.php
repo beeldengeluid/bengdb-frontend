@@ -6,7 +6,7 @@ class Util {
         $date = substr($str, 1);
         $date = ltrim($date, '0');
 
-        if ($opts['dateonly']) {
+        if (isset($opts['dateonly'])) {
             return substr($date, 0, 10);
         } else {
             return $date;

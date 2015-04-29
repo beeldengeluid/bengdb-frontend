@@ -19,8 +19,9 @@
             $renderer->addExtension(new Twig_Extension_Debug());
         }
 
-        $data = new ArrayObject($obj);
-        echo $renderer->render("$template.html", $data->getArrayCopy());
+        $data = (new ArrayObject($obj))->getArrayCopy();
+        $renderer->addGlobal('fullurl', $data['fullurl']);
+        echo $renderer->render("$template.html", $data);
         $app->stop();
     }
 
