@@ -4,6 +4,8 @@ use \Httpful\Request;
 class Item extends Page  {
     private $qid, $pageType;
 
+    const BENGWIKI_ENDPOINT = "http://beeldengeluidwiki.nl/index.php/";
+
     function __construct($id, $type) {
         parent::__construct();
         $this->fullurl = sprintf("%s/%s", $this->root, $id);
@@ -19,6 +21,12 @@ class Item extends Page  {
 
             if ($gtaadata->bengwiki) {
                 $this->bengwikitext = BengWiki::getPagetext($gtaadata->bengwiki);
+                $this->bengwikilink = self::BENGWIKI_ENDPOINT . $gtaadata->bengwiki;
+                $this->bengwikititle = str_replace("_", " ", $gtaadata->bengwiki);
+            }
+
+            if ($gtaadata->gtaapreflabel) {
+                $this->bengimages = Immix::getImagesForPerson($gtaadata->gtaapreflabel);
             }
 
             $this->qid = $gtaadata->wikidata;

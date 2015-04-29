@@ -12,6 +12,7 @@ use \Httpful\Request;
 
 define('WDQ_URL', "http://wdq.wmflabs.org/api?q=CLAIM[1741]");
 define('WIKIDATA_URL', "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=en|nl&format=json&props=aliases|labels|descriptions|claims&languagefallback=1");
+define('GTAA_ENDPOINT', 'http://data.beeldengeluid.nl/gtaa/%s.json');
 
 define('PROP_FIELDOFWORK', 'P101');
 define('PROP_COUNTRYOFCITIZENSHIP', 'P27');
@@ -191,9 +192,31 @@ function fetchNewItems() {
     echo "That's all folks, fetched " . $totalFetched . " items\n" ;
 }
 
+function addGtaaLabels() {
+    $items = ORM::for_table('combined')->where_null('gtaapreflabel')->find_many();
+
+    foreach ($items as $item) {
+        $url = sprintf(GTAA_ENDPOINT, $item->gtaa);
+        $req = Request::get($url)->send();
+
+        if (!isset($req->body->prefLabel)) {
+            die("Could not fetch preflabel\n");
+        }
+
+        $prefLabel = $req->body->prefLabel[0];
+
+        printf("%s : %s\n", $item->gtaa, $prefLabel);
+
+        $item->gtaapreflabel = $prefLabel;
+
+        $item->save();
+    }
+}
+
 function main() {
-    fetchNewItems();
-    addMetadata();
+    // fetchNewItems();
+    // addMetadata();
+    addGtaaLabels();
     die("That's all folks..\n");
 }
 

@@ -8,6 +8,7 @@
                         {% include 'wikipedia-credits.html' %}
                     {% elseif (bengwikitext and not article.text) %}
                         {{bengwikitext}}
+                        {% include 'bengwiki-credits.html' %}
                     {% elseif bengwikitext and article.text %}
                         <div role="tabpanel">
                             <ul class="nav nav-tabs" role="tablist">
@@ -27,6 +28,7 @@
 
                                 <div role="tabpanel" class="tab-pane" id="tab-bengwiki">
                                     {{bengwikitext}}
+                                    {% include 'bengwiki-credits.html' %}
                                 </div>
                             </div>
                         </div>
