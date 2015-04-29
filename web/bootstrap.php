@@ -27,6 +27,16 @@
             "username" => DB_USER,
             "password" => DB_PASS
         ]);
+
+        if (DEBUG) {
+            // Log all queries
+            ORM::configure([
+                'logging' => true,
+                'logger' => function($str) {
+                    error_log($str);
+                }
+            ]);
+        }
     } catch (PDOException $e) {
         die($e->getMessage());
     }

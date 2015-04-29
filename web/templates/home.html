@@ -1,4 +1,5 @@
 {% include 'header.html' %}
+{% import "macros.html" as macros %}
 
 <div class="container container-fill-home">
     <div class="row">
@@ -65,18 +66,15 @@
     {% if not isSearch %}
     <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
-            <h3>Tien meest recent toegevoegde personen</h3>
+            <h3>Geboren op deze dag ({{"now" | date("d F")}})</h3>
 
-            <ul class="list-unstyled">
-                {% for item in recentItems %}
-                <li class="buffer-bottom-1">
-                    <a href="{{fullurl}}/{{item.gtaa}}">
-                        <strong>{{item.label}}</strong><br>
-                        {{item.description}}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
+            {{macros.thumblist(bornThisDay)}}
+        </div>
+
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <h3>Recent toegevoegd</h3>
+
+            {{macros.thumblist(recentItems)}}
         </div>
     </div>
     {% endif %}

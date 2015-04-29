@@ -32,3 +32,20 @@
     </div>
     {% endif %}
 {% endmacro %}
+
+{% macro thumblist(list) %}
+    {% if list %}
+    <div class="row">
+    {% for item in list %}
+        <div class="col-md-3">
+            <a href="{{fulurl}}/{{item.gtaa}}"
+               class="thumbnail thumbnail-bg"
+               style="background-image:url('//commons.wikimedia.org/wiki/Special:Redirect/file/{{item.image}}?width=300')"
+            >
+                <h4 class="thumbnail-label">{{item.label}}</h4>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+{% endmacro %}
