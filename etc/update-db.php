@@ -16,6 +16,9 @@ define('WIKIDATA_URL', "http://www.wikidata.org/w/api.php?action=wbgetentities&i
 define('PROP_FIELDOFWORK', 'P101');
 define('PROP_COUNTRYOFCITIZENSHIP', 'P27');
 define('PROP_OCCUPATION', 'P106');
+define('PROP_IMAGE', 'P18');
+define('PROP_DATEOFBIRTH', 'P569');
+
 define('ITEM_ENTERTAINMENT', 'Q173799');
 define('ITEM_NETHERLANDS', 'Q55');
 define('ITEM_SINGER', 'Q177220');
@@ -117,7 +120,36 @@ function fetchItems($items) {
     }
 }
 
-function main() {
+function addMetadata() {
+    echo "Now adding birthdate / image\n";
+
+    $items = ORM::for_table('combined')->where_not_null('data')->find_many();
+
+    foreach ($items as $item) {
+        $data = json_decode($item->data);
+
+        printf("Parsing %s\n", $data->id);
+
+        if (isset($data->claims->P18)) {
+            $img = $data->claims->P18[0]->mainsnak->datavalue->value;
+            $item->image = $img;
+        }
+
+        if (isset($data->claims->P569)) {
+            $date = $data->claims->P569[0]->mainsnak->datavalue->value->time;
+            $item->birthdate = Util::parseProlepticDate($date, ['dateonly' => true]);
+        }
+
+        printf("Got %s/%s\n", $item->image, $item->birthdate);
+
+        $item->save();
+    }
+
+
+    echo("Okay, metadata added\n");
+}
+
+function fetchNewItems() {
     $totalFetched = 0;
     $req = Request::get(WDQ_URL)->send();
     echo "Got WDQ query\n";
@@ -156,7 +188,13 @@ function main() {
 
     $totalFetched += count($itemsToFetch);
 
-    die("That's all folks, fetched " . $totalFetched . " items\n");
+    echo "That's all folks, fetched " . $totalFetched . " items\n" ;
+}
+
+function main() {
+    fetchNewItems();
+    addMetadata();
+    die("That's all folks..\n");
 }
 
 main();

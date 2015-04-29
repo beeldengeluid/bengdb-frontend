@@ -29,7 +29,7 @@ class WikidataItem {
             }
 
             if ($value->datatype == "time") {
-                $time = $this->parseProlepticDate($value->value->time);
+                $time = Util::parseProlepticDate($value->value->time);
                 return date_parse($time);
             }
 
@@ -49,13 +49,6 @@ class WikidataItem {
 
         // Remove empty labels
         return array_filter($values);
-    }
-
-    // HACK: This is really, pretty ugly
-    // See < https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar >
-    private function parseProlepticDate($str) {
-        $date = substr($str, 1);
-        return ltrim($date, '0');
     }
 
     public function getItemData() {
