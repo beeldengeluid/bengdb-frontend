@@ -78,7 +78,7 @@
                                 {% set related = related | merge([link.labels]) %}
                             {% endfor %}
 
-                            {{ related | join(',') }}
+                            {{ related | join(', ') }}
                         </p>
                     {% endif %}
 

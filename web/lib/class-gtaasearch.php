@@ -36,7 +36,7 @@ class GtaaSearch {
         return ORM::for_table(self::TABLE)
             ->where_not_null('image')
             ->where_raw("`birthdate` REGEXP '$regex'")
-            ->limit(10)
+            ->limit(4)
             ->find_array();
     }
 }
