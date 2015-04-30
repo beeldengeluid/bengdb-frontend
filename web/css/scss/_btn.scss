@@ -1,0 +1,9 @@
+.btn {
+    white-space: normal;
+
+    &.btn-info {
+        background: white;
+        border-color: color(dove);
+        color: #666;
+    }
+}
