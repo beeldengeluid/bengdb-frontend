@@ -30,11 +30,12 @@ class GtaaSearch {
 
     public static function getBornOnThisDay() {
         // Returns all items from the database that have a birthdate, and image, and
-        // were born on this day
+        // were born on this day, and are 'included'
         $regex = sprintf(".{4}-%s-%s", date("m"), date("d"));
 
         return ORM::for_table(self::TABLE)
             ->where_not_null('image')
+            ->where('included', 1)
             ->where_raw("`birthdate` REGEXP '$regex'")
             ->limit(4)
             ->find_array();

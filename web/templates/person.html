@@ -20,51 +20,41 @@
 
             <div class="col-md-9">
                 <div class="header-image-text row">
-                    <h1>{{item.labels}}</h1>
+                    <h1>
+                        {{item.labels}}
+
+                        {% if item.dateOfBirth or item.placeOfBirth %}
+                        {% spaceless %}
+                        (
+                            {{item.placeOfBirth[0].label}}
+
+                            {% if item.dateOfBirth %}
+                                {% if item.placeOfBirth %},{% endif %}
+                                {% for d in item.dateOfBirth %}
+                                    {{ [d.day, d.month, d.year] | join('-') }}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if item.dateOfDeath %}
+                            –
+                                {{item.placeOfDeath[0].label}}
+
+                                {% if item.dateOfDeath %}
+                                    {% if item.dateOfBirth %},{% endif %}
+
+                                    {% for d in item.dateOfDeath %}
+                                        {{ [d.day, d.month, d.year] | join('-') }}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        )
+                        {% endspaceless %}
+                        {% endif %}
+                    </h1>
+
                     {% if item.aliases %}
                         <p>Ook bekend als: {{ item.aliases | join(', ') }}</p>
                     {% endif %}
-
-                    <h3 class="text-muted">
-                        {% if item.dateOfBirth %}
-                            Geboren
-                            {% for d in item.dateOfBirth %}
-                                {{ [d.day, d.month, d.year] | join('-') }}
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if item.placeOfBirth %}
-                            {% if item.dateOfBirth %}
-                                te
-                            {% endif %}
-
-                            {{item.placeOfBirth[0].label}}
-                        {% endif %}
-
-                        {% if item.dateOfDeath %}
-                            {% if item.dateOfBirth %}
-                                , gestorven
-                            {% else %}
-                                Gestorven
-                            {% endif %}
-
-                            {% for d in item.dateOfDeath %}
-                                {{ [d.day, d.month, d.year] | join('-') }}
-                            {% endfor %}
-
-                            {% if item.causeOfDeath %}
-                            (door {{item.causeOfDeath[0].label}})
-                            {% endif %}
-                        {% endif %}
-
-                        {% if item.placeOfDeath %}
-                            {% if item.dateOfDeath %}
-                                te
-                            {% endif %}
-
-                            {{item.placeOfDeath[0].label}}
-                        {% endif %}
-                    </h3>
 
                     <p class="lead">{{item.descriptions}}</p>
 
@@ -78,7 +68,16 @@
                                 {% set related = related | merge([link.labels]) %}
                             {% endfor %}
 
-                            {{ related | join(', ') }}
+                            {% if related | length < 5 %}
+                                {{ related | join(', ') }}
+                            {% else %}
+                                {{ related | slice(0, 5) | join(', ') }}
+                                <a data-target="#more-related" data-toggle="collapse">meer...</a>
+
+                                <div id="more-related" class="collapse">
+                                    {{ related | slice(5) | join(', ') }}
+                                </div>
+                            {% endif %}
                         </p>
                     {% endif %}
 

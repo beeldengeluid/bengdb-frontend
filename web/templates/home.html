@@ -56,11 +56,13 @@
 
     {% if not isSearch %}
     <div class="row">
+        {% if bornThisDay %}
         <div class="col-md-8 col-md-offset-2 text-center">
             <h3>Geboren op deze dag ({{"now" | date("d F")}})</h3>
 
             {{macros.thumblist(bornThisDay)}}
         </div>
+        {% endif %}
 
         <div class="col-md-8 col-md-offset-2 text-center">
             <h3>Recent toegevoegd</h3>
