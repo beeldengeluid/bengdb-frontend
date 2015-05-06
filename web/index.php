@@ -15,11 +15,15 @@
             "debug" => DEBUG
         ]);
 
+        // Dutch thousand seperators
+        $renderer->getExtension('core')->setNumberFormat(0, ',', '.');
+
         if (DEBUG)  {
             $renderer->addExtension(new Twig_Extension_Debug());
         }
 
         $data = (new ArrayObject($obj))->getArrayCopy();
+        $data['template'] = $template;
         $renderer->addGlobal('fullurl', $data['fullurl']);
         echo $renderer->render("$template.html", $data);
         $app->stop();

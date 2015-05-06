@@ -19,6 +19,10 @@ class GtaaSearch {
             ->find_array();
     }
 
+    public static function countItems() {
+        return ORM::for_table(self::TABLE)->count();
+    }
+
     public static function getRecentItems() {
         return ORM::for_table(self::TABLE)
             ->where('included', 1)

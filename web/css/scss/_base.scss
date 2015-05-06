@@ -15,6 +15,15 @@ html, body, .full-screen {
     height: 100%;
 }
 
+body.template-home {
+    @include bg-cover;
+    background-image: url('../img/bg.jpg');
+
+    &, h3, li, p {
+        color: white;
+    }
+}
+
 .container-fill-home {
     min-height: calc(100% - 50px);
 }
@@ -82,6 +91,12 @@ html, body, .full-screen {
 
 .dl-horizontal dl {
     text-align: left;
+}
+
+.text-small {
+    p, li, a {
+        font-size: 1.0em;
+    }
 }
 
 .list-columns {

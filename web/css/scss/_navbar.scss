@@ -1,11 +1,12 @@
 .navbar-inverse {
-    background-color: $primary;
-    border-color: $primary;
+    @include bg-cover;
+    background-image: url('../img/bg.jpg');
+    border-color: white;
+    border: 0;
     margin-bottom: 0;
 
     .navbar-brand {
-        color: white;
-        font-family: $font-family-title;
+        padding: 7px 15px 0 15px;
     }
 
     .glyphicon, .navbar-nav li > a {

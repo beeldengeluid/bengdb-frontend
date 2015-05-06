@@ -6,5 +6,6 @@ class Homepage extends Page {
         parent::__construct();
         $this->recentItems = GtaaSearch::getRecentItems();
         $this->bornThisDay = GtaaSearch::getBornOnThisDay();
+        $this->itemCount = GtaaSearch::countItems();
     }
 }

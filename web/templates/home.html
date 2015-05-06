@@ -2,14 +2,16 @@
 {% import "macros.html" as macros %}
 
 <div class="container container-fill-home">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1 class="header-logotype">
-                <a href="{{root}}" class="header-logotype">BengDB</a>
-            </h1>
+    <div class="row buffer-top-4">
+        <div class="text-center col-md-12">
+            <img src="{{root}}/img/logo.png" width="250" alt="BengDB">
+        </div>
 
+        <div class="col-md-8 col-md-offset-2 buffer-top-2 text-center">
             <p class="lead">
-                De Beeld en Geluid Database (BengDB) is een visueel aantrekkelijke en functioneel doorzoekbare database van de personen uit de Nederlandse televisiegeschiedenis (zowel voor als achter de schermen), gebaseerd op de GTAA-thesaurus van Beeld en Geluid, aangevuld met data uit Wikidata, Wikipedia, de Beeld en Geluid wiki en andere (open) bronnen.
+                Welkom bij de Beeld en Geluid Database (BengDB). Op deze site vind je uitgebreide
+                visuele informatie over meer dan {{itemCount | number_format}} personen uit de Nederlandse televisiegeschiedenis. Zoek of selecteer een van de uitgelichte
+                personen.
             </p>
         </div>
     </div>
@@ -22,7 +24,7 @@
                            id="q"
                            name="q"
                            class="form-control"
-                           placeholder="Doorzoek de Nederlandse televisiegeschiedenis..."
+                           placeholder="Doorzoek {{itemCount | number_format}} Nederlandse televisiepersoonlijkheden..."
                            value="{{q}}"
                     >
 
@@ -72,14 +74,5 @@
     </div>
     {% endif %}
 </div>
-
-<footer class="container buffer-top-2">
-    <div class="row">
-        <ul class="list-inline text-center">
-            <li>Ontwikkeld door <a href="http://www.twitter.com/hayify">Hay Kranen</a></li>
-            <li>Alle code van dit project is beschikbaar op <a href="https://github.com/beeldengeluid/bengdb-frontend">Github</a></li>
-        </ul>
-    </div>
-</footer>
 
 {% include 'footer.html' %}

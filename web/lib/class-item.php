@@ -48,9 +48,81 @@ class Item extends Page  {
         $this->setTitle($this->item->labels);
     }
 
+    private function getBirthDeathDetails() {
+        /*
+                        {{item.labels}}
+
+                        {% if item.dateOfBirth or item.placeOfBirth %}
+                        {% spaceless %}
+                        (
+                            {{item.placeOfBirth[0].label}}
+
+                            {% if item.dateOfBirth %}
+                                {% if item.placeOfBirth %},{% endif %}
+                                {% for d in item.dateOfBirth %}
+                                    {{ [d.day, d.month, d.year] | join('-') }}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if item.dateOfDeath %}
+                            –
+                                {{item.placeOfDeath[0].label}}
+
+                                {% if item.dateOfDeath %}
+                                    {% if item.dateOfBirth %},{% endif %}
+
+                                    {% for d in item.dateOfDeath %}
+                                        {{ [d.day, d.month, d.year] | join('-') }}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        )
+                        {% endspaceless %}
+                        {% endif %}
+        */
+
+        $str = "";
+
+        $hasPlaceOfBirth = !empty($this->item->placeOfBirth);
+        $hasDateOfBirth = !empty($this->item->dateOfBirth);
+        $hasPlaceOfDeath = !empty($this->item->placeOfDeath);
+        $hasDateOfDeath = !empty($this->item->dateOfDeath);
+
+        if ($hasPlaceOfBirth) {
+            $str = $this->item->placeOfBirth[0]['label'];
+        }
+
+        if ($hasDateOfBirth && $hasPlaceOfBirth) {
+            $str .= ", ";
+        }
+
+        if ($hasDateOfBirth) {
+            $str .= Util::getDateStr($this->item->dateOfBirth[0]);
+        }
+
+        if (($hasPlaceOfDeath || $hasDateOfDeath) && ($hasPlaceOfBirth || $hasDateOfBirth)) {
+            $str .= " – ";
+        }
+
+        if ($hasPlaceOfDeath) {
+            $str .= $this->item->placeOfDeath[0]['label'];
+        }
+
+        if ($hasDateOfDeath && $hasPlaceOfDeath) {
+            $str .= ", ";
+        }
+
+        if ($hasDateOfDeath) {
+            $str .= Util::getDateStr($this->item->dateOfDeath[0]);
+        }
+
+        return $str;
+    }
+
     private function addValues() {
         if ($this->pageType === 'person') {
             $this->wditem->addValues(Properties::$person);
+            $this->item->birthDeathDetails = $this->getBirthDeathDetails();
         }
     }
 
