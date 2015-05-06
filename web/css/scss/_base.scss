@@ -16,7 +16,10 @@ html, body, .full-screen {
 }
 
 body.template-home {
-    @include bg-cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
     background-image: url('../img/bg.jpg');
 
     &, h3, li, p {
