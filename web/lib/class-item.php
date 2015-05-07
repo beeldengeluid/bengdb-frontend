@@ -49,38 +49,6 @@ class Item extends Page  {
     }
 
     private function getBirthDeathDetails() {
-        /*
-                        {{item.labels}}
-
-                        {% if item.dateOfBirth or item.placeOfBirth %}
-                        {% spaceless %}
-                        (
-                            {{item.placeOfBirth[0].label}}
-
-                            {% if item.dateOfBirth %}
-                                {% if item.placeOfBirth %},{% endif %}
-                                {% for d in item.dateOfBirth %}
-                                    {{ [d.day, d.month, d.year] | join('-') }}
-                                {% endfor %}
-                            {% endif %}
-
-                            {% if item.dateOfDeath %}
-                            –
-                                {{item.placeOfDeath[0].label}}
-
-                                {% if item.dateOfDeath %}
-                                    {% if item.dateOfBirth %},{% endif %}
-
-                                    {% for d in item.dateOfDeath %}
-                                        {{ [d.day, d.month, d.year] | join('-') }}
-                                    {% endfor %}
-                                {% endif %}
-                            {% endif %}
-                        )
-                        {% endspaceless %}
-                        {% endif %}
-        */
-
         $str = "";
 
         $hasPlaceOfBirth = !empty($this->item->placeOfBirth);

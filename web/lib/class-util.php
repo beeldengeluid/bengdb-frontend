@@ -31,7 +31,7 @@ class Util {
     public static function getDateStr(array $date) {
         return sprintf("%s %s %s",
             $date['day'],
-            self::$months[$date['month']],
+            self::$months[$date['month'] - 1],
             $date['year']
         );
     }

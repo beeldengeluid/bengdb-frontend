@@ -214,8 +214,8 @@ function addGtaaLabels() {
 }
 
 function main() {
-    // fetchNewItems();
-    // addMetadata();
+    fetchNewItems();
+    addMetadata();
     addGtaaLabels();
     die("That's all folks..\n");
 }
