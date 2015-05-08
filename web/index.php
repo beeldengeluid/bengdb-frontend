@@ -31,19 +31,15 @@
     }
 
     function getItem($id) {
-        // Check for Q items
-        if (strtolower($id[0]) == "q") {
-            $type = "wikidata";
-        } else if (ctype_digit($id)) {
-            $type = "gtaa";
-        } else {
+        $type = Util::getIdType($id);
+
+        if ($type == "unknown") {
             throw new Exception("Invalid ID", 400);
         }
 
         // Check if there is a GTAA id associated with this
         // Wikidata ID, if so, redirect
         if ($type == "wikidata") {
-
             $gtaaid = GtaaSearch::lookupCombined($id, "wikidata");
 
             if ($gtaaid) {
@@ -106,6 +102,13 @@
     $app->get("/", function() use ($app) {
         if ($app->request->get('q')) {
             $q = $app->request->get('q');
+
+            // Maybe we've got a Wikidata ID or GTAA id? In that case, redirect
+            // to the specific pages
+            if (Util::getIdType($q) != "unknown") {
+                $app->redirect($q);
+            }
+
             render("home", new SearchResult($q));
         } else {
             render("home", new Homepage());

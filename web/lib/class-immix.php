@@ -10,6 +10,11 @@ class Immix {
 
         try {
             $data = ApiRequest::get($url);
+
+            // Fucking hell
+            if (is_object($data)) {
+                return false;
+            }
         } catch (Exception $e) {
             return false;
         }

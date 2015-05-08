@@ -15,6 +15,17 @@ class Util {
         "december"
     ];
 
+    public static function getIdType($id) {
+        // Check for Q items
+        if (strtolower($id[0]) == "q") {
+            return "wikidata";
+        } else if (ctype_digit($id)) {
+            return "gtaa";
+        } else {
+            return "unknown";
+        }
+    }
+
     // HACK: This is really, pretty ugly
     // See < https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar >
     public static function parseProlepticDate($str, array $opts = []) {

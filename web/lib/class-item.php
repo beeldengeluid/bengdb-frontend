@@ -11,6 +11,7 @@ class Item extends Page  {
         $this->fullurl = sprintf("%s/%s", $this->root, $id);
         $this->pageType = $this->getPageType();
         $this->randomItems = GtaaSearch::getRandomItems();
+        $this->itemType = $type;
 
         if ($type == "wikidata") {
             $this->qid = $id;
