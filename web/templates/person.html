@@ -24,10 +24,14 @@
                         {{item.labels}}
                     </h1>
 
-                    <p class="lead">{{item.descriptions}}</p>
+                    {% if item.descriptions %}
+                        <p class="lead">
+                            {{item.descriptions}}
 
-                    {% if item.birthDeathDetails %}
-                        <h3>{{item.birthDeathDetails}}</h3>
+                            {% if item.birthDeathDetails %}
+                                ({{item.birthDeathDetails}})
+                            {% endif %}
+                        </p>
                     {% endif %}
 
                     {% if item.aliases %}
@@ -59,8 +63,15 @@
 
                     <button class="btn btn-info" data-toggle="collapse" data-target="#detailinfo">
                         <span class="glyphicon glyphicon-list-alt"></span>
-                        Toon detailinformatie
+                        Detailinformatie
                     </button>
+
+                    {% if bengimages %}
+                    <button class="btn btn-info" data-toggle="collapse" data-target="#bengimages">
+                        <span class="glyphicon glyphicon-picture"></span>
+                        Foto's
+                    </button>
+                    {% endif %}
 
                     <div id="detailinfo" class="collapse">
                         <dl class="dl-horizontal buffer-top-2">
@@ -91,40 +102,28 @@
                 </div> <!-- .header-image-text -->
             </div> <!-- .col-md-9 -->
         </div> <!-- .row -->
+
+        {% if bengimages %}
+        <div id="bengimages" class="collapse row">
+            <div class="text-center col-md-12 buffer-top-2">
+                <p class="lead bg-dark">Dit is een selectie van foto's gerelateerd aan <b>{{item.labels}}</b> uit de collectie van Beeld en Geluid.</p>
+            </div>
+
+            {% for img in bengimages %}
+                <div class="col-md-3">
+                    <a href="{{img.image}}"
+                       class="thumbnail thumbnail-bg img-zoomable"
+                       style="background-image:url('{{img.thumb}}')"
+                       title="{{img.label}}"
+                    >
+                        <h4 class="thumbnail-label">{{img.label}}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div> <!-- .container -->
 </div> <!-- .header-image -->
-
-{% if bengimages %}
-<article class="bg-light bg-spaced">
-    <div class="container">
-        <div class="row">
-                <button class="btn btn-default btn-lg center-block buffer-bottom-2" data-toggle="collapse" data-target="#bengimages">
-                    <!-- <span class="glyphicon glyphicon-picture"></span> -->
-                    <img src="{{bengimages[0].thumb}}" width="100">
-                    Gerelateerde foto's
-                </button>
-
-                <div id="bengimages" class="collapse">
-                    <div class="text-center">
-                        <p class="lead">Dit is een selectie van foto's gerelateerd aan <b>{{item.labels}}</b> uit de collectie van Beeld en Geluid.</p>
-                    </div>
-
-                    {% for img in bengimages %}
-                        <div class="col-md-3">
-                            <a href="{{img.image}}"
-                               class="thumbnail thumbnail-bg img-zoomable"
-                               style="background-image:url('{{img.thumb}}')"
-                               title="{{img.label}}"
-                            >
-                                <h4 class="thumbnail-label">{{img.label}}</h4>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-        </div>
-    </div>
-</article>
-{% endif %}
 
 {% include 'wikipedia-article.html' %}
 {% include 'navbar-footer.html' %}

@@ -48,6 +48,7 @@ class Item extends Page  {
         $this->setTitle($this->item->labels);
     }
 
+    // Hairy code!
     private function getBirthDeathDetails() {
         $str = "";
 
