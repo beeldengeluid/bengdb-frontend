@@ -47,13 +47,17 @@
             </div>
         </div>
 
-        {% if article.related %}
+
         <div class="row">
             <div class="col-md-12">
-                <h3>Gerelateerd aan {{item.labels}}</h3>
-                {{macros.thumblist(article.related | slice(0, 8), true)}}
+                {% if article.related %}
+                    <h3>Gerelateerd aan {{item.labels}}</h3>
+                    {{macros.thumblist(article.related | slice(0, 4), true)}}
+                {% else %}
+                    <h3>Meer personen uit de BengDB</h3>
+                    {{macros.thumblist(randomItems, true)}}
+                {% endif %}
             </div>
         </div>
-        {% endif %}
     </div>
 </article>

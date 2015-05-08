@@ -45,6 +45,8 @@ class Item extends Page  {
             $this->article = $article->getArticleData();
         }
 
+        $this->randomItems = GtaaSearch::getRandomItems();
+
         $this->setTitle($this->item->labels);
     }
 

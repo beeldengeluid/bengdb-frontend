@@ -29,7 +29,7 @@
                             {{item.descriptions}}
 
                             {% if item.birthDeathDetails %}
-                                ({{item.birthDeathDetails}})
+                                ({% if item.dateOfBirth and not item.dateOfDeath %}geb. {% endif %}{{item.birthDeathDetails}})
                             {% endif %}
                         </p>
                     {% endif %}

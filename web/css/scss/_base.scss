@@ -31,6 +31,30 @@ body.template-home {
     }
 }
 
+table {
+    empty-cells: show;
+    border: 1px solid #ccc;
+}
+
+thead, th {
+    background: #ddd;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-align: left;
+}
+
+table + h3 {
+    margin-top: 20px;
+}
+
+.lead {
+    margin-bottom: 10px;
+}
+
 .container-fill-home {
     min-height: calc(100% - 50px);
 }

@@ -57,4 +57,18 @@ class GtaaSearch {
             ->limit(4)
             ->find_array();
     }
+
+    public static function getRandomItems($limit = 4) {
+        $items = ORM::for_table(self::TABLE)
+            ->where_not_null('image')
+            ->where('included', 1)
+            ->order_by_expr('RAND()')
+            ->limit($limit)
+            ->find_array();
+
+        return array_map(function($item) {
+            unset($item['data']);
+            return $item;
+        }, $items);
+    }
 }
