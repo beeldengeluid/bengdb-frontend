@@ -4,8 +4,21 @@ use \Httpful\Request;
 class GtaaSearch {
     const TABLE = "combined";
 
+    public static function getPrettyItemById($id) {
+        $item = self::lookupCombined($id);
+
+        if (!empty($item->included) && !empty($item->image)) {
+            unset($item->data);
+            return $item;
+        }
+    }
+
     public static function lookupCombined($id, $type = "gtaa") {
-        $item = ORM::for_table(self::TABLE)->where($type, $id)->limit(10)->find_array();
+        $item = ORM::for_table(self::TABLE)
+            ->where($type, $id)
+            ->limit(10)
+            ->find_array();
+
         return count($item) === 0 ? false : (object) $item[0];
     }
 

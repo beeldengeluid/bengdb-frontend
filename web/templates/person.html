@@ -24,6 +24,8 @@
                         {{item.labels}}
                     </h1>
 
+                    <p class="lead">{{item.descriptions}}</p>
+
                     {% if item.birthDeathDetails %}
                         <h3>{{item.birthDeathDetails}}</h3>
                     {% endif %}
@@ -31,8 +33,6 @@
                     {% if item.aliases %}
                         <p>Ook bekend als: {{ item.aliases | join(', ') }}</p>
                     {% endif %}
-
-                    <p class="lead">{{item.descriptions}}</p>
 
                     {% if linkshere %}
                         <p>

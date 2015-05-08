@@ -46,5 +46,14 @@
                 {% endfor %}
             </div>
         </div>
+
+        {% if article.related %}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Gerelateerd aan {{item.labels}}</h3>
+                {{macros.thumblist(article.related | slice(0, 8), true)}}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </article>

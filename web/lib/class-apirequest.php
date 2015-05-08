@@ -9,7 +9,7 @@ class ApiRequest {
             throw new Exception("Could not connect to API", 500);
         }
 
-        if (!$res->body->response) {
+        if (!isset($res->body->response)) {
             throw new Exception("This item does not exist", 404);
         }
 

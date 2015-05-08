@@ -25,6 +25,7 @@
         $data = (new ArrayObject($obj))->getArrayCopy();
         $data['template'] = $template;
         $renderer->addGlobal('fullurl', $data['fullurl']);
+        $renderer->addGlobal('root', $data['root']);
         echo $renderer->render("$template.html", $data);
         $app->stop();
     }
