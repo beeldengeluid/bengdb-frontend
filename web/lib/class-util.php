@@ -35,4 +35,14 @@ class Util {
             $date['year']
         );
     }
+
+    public static function strInArray($haystack, $needles) {
+        $count = array_filter($needles, function($needle) use ($haystack) {
+            return strpos($haystack, $needle) !== false;
+        });
+
+        $count = count($count);
+
+        return $count > 0;
+    }
 }

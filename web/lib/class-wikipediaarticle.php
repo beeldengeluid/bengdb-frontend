@@ -6,6 +6,11 @@ class WikipediaArticle {
 
     private $article, $title, $lang;
 
+    // This is a bit of a hack
+    private $ignoreImages = [
+        "Comicsfilm.png"
+    ];
+
     function __construct($title, $lang) {
         $this->title = $title;
         $this->lang = $lang;
@@ -36,7 +41,9 @@ class WikipediaArticle {
             $article->images = array_filter($article->images, function($img) {
                 $path = pathinfo($img->title);
                 $ext = strtolower($path['extension']);
-                return $ext == "jpg" || $ext == "png" || $ext == "gif";
+                $hasext = in_array($ext, ["jpg", "png", "gif"]);
+                $ignoreInTitle = Util::strInArray($img->title, $this->ignoreImages);
+                return $hasext && !$ignoreInTitle;
             });
 
             $article->images = array_values($article->images);
