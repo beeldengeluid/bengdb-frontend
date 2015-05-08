@@ -3,6 +3,7 @@ use \Httpful\Request;
 
 class GtaaSearch {
     const TABLE = "combined";
+    const GTAA_ENDPOINT = "http://data.beeldengeluid.nl/gtaa/%s.json";
 
     public static function getPrettyItemById($id) {
         $item = self::lookupCombined($id);
@@ -20,6 +21,32 @@ class GtaaSearch {
             ->find_array();
 
         return count($item) === 0 ? false : (object) $item[0];
+    }
+
+    public static function lookupOnline($id) {
+        $url = sprintf(self::GTAA_ENDPOINT, $id);
+        $req = ApiRequest::get($url);
+
+        $descriptions = isset($req->scopeNote) ? reset($req->scopeNote) : "";
+
+        if (isset($req->hiddenLabel)) {
+            $labels = reset($req->hiddenLabel);
+        } else {
+            $labels = reset($req->prefLabel);
+        }
+
+        $scheme = str_replace(
+            "http://data.beeldengeluid.nl/gtaa/",
+            "",
+            reset($req->inScheme)
+        );
+
+        $descriptions = sprintf("%s (%s)", $descriptions, $scheme);
+
+        return (object) [
+            "descriptions" => $descriptions,
+            "labels" => $labels
+        ];
     }
 
     public static function search($q) {

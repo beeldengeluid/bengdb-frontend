@@ -9,6 +9,8 @@ class Item extends Page  {
     function __construct($id, $type) {
         parent::__construct();
         $this->fullurl = sprintf("%s/%s", $this->root, $id);
+        $this->pageType = $this->getPageType();
+        $this->randomItems = GtaaSearch::getRandomItems();
 
         if ($type == "wikidata") {
             $this->qid = $id;
@@ -16,16 +18,21 @@ class Item extends Page  {
             $gtaadata = GtaaSearch::lookupCombined($id);
 
             if (!$gtaadata) {
-                throw new Exception("Non-matched GTAA id", 404);
+                // Look it up online
+                $this->item = GtaaSearch::lookupOnline($id);
+                $this->item->enriched = false;
+                $this->item->id = $id;
+                $this->setTitle($this->item->labels);
+                return;
             }
 
-            if ($gtaadata->bengwiki) {
+            if (isset($gtaadata->bengwiki)) {
                 $this->bengwikitext = BengWiki::getPagetext($gtaadata->bengwiki);
                 $this->bengwikilink = self::BENGWIKI_ENDPOINT . $gtaadata->bengwiki;
                 $this->bengwikititle = str_replace("_", " ", $gtaadata->bengwiki);
             }
 
-            if ($gtaadata->gtaapreflabel) {
+            if (isset($gtaadata->gtaapreflabel)) {
                 $this->bengimages = Immix::getImagesForPerson($gtaadata->gtaapreflabel);
             }
 
@@ -36,7 +43,7 @@ class Item extends Page  {
         $this->wdlinkshere = new WikidataLinkshere($this->qid, $this->lang);
         $this->linkshere = $this->wdlinkshere->getData();
         $this->item = $this->wditem->getItemData();
-        $this->pageType = $this->getPageType();
+
         $this->addValues();
 
         if (isset($this->item->sitelinks->{$this->lang})) {
@@ -45,8 +52,7 @@ class Item extends Page  {
             $this->article = $article->getArticleData();
         }
 
-        $this->randomItems = GtaaSearch::getRandomItems();
-
+        $this->item->enriched = true;
         $this->setTitle($this->item->labels);
     }
 

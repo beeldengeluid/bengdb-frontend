@@ -34,6 +34,10 @@
                         </p>
                     {% endif %}
 
+                    {% if not item.enriched and item.id %}
+                    <p>GTAA: {{item.id}}</p>
+                    {% endif %}
+
                     {% if item.aliases %}
                         <p>Ook bekend als: {{ item.aliases | join(', ') }}</p>
                     {% endif %}
@@ -61,10 +65,12 @@
                         </p>
                     {% endif %}
 
+                    {% if item.enriched %}
                     <button class="btn btn-info" data-toggle="collapse" data-target="#detailinfo">
                         <span class="glyphicon glyphicon-list-alt"></span>
                         Detailinformatie
                     </button>
+                    {% endif %}
 
                     {% if bengimages %}
                     <button class="btn btn-info" data-toggle="collapse" data-target="#bengimages">
