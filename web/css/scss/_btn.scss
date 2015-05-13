@@ -6,6 +6,12 @@
         border-color: color(dove);
         color: #666;
     }
+
+    &.btn-trans {
+        background: rgba(255, 255, 255, 0.5);
+        color: black;
+        border: 1px solid white;
+    }
 }
 
 a[data-toggle] {

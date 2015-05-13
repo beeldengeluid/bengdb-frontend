@@ -131,6 +131,10 @@
         }
     });
 
+    $app->get("/about", function() use ($app) {
+        render("about", new Homepage());
+    });
+
     $app->get("/api/search", function() use ($app) {
         $q = $app->request->get('q');
 

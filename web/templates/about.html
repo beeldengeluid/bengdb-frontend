@@ -1,0 +1,73 @@
+{% include 'header.html' %}
+{% include 'navbar.html' %}
+
+<div class="container container-fill-home">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Over de BengDB</h1>
+            <p class="lead">De BengDB is een visuele encyclopedie over de Nederlandse televisiegeschiedenis, samengesteld uit meerdere open(bare) bronnen.</p>
+
+            <p>De BengDB is een experiment van de afdeling Kennis en Innovatie van <a href="http://www.beeldengeluid.nl/">Beeld en Geluid</a> om te onderzoeken of het mogelijk is om meerdere databronnen te combineren op basis van de <a href="http://gtaa.beeldengeluid.nl">GTAA</a>, de <a href="https://nl.wikipedia.org/wiki/Thesaurus">thesaurus</a> die binnen Beeld en Geluid wordt gebruikt om de media in het archief beter doorzoekbaar te maken.</p>
+
+            <p>Op deze site wordt data uit verschillende bronnen samengebracht op een prettig leesbare wijze. Deze encyclopedie is dus niet handmatig geschreven of samengesteld, in plaats daarvan worden bestaande teksten, afbeelding en data hergebruikt.</p>
+
+            <p>De BengDB is opgebouwd rond de GTAA, en dit is ook te zien in de URL van elke pagina. Het nummer wat je daar ziet is een uniek identificatienummer voor die specifieke persoon. Ándre van Duin heeft als nummer <code>95024</code>, dus de URL naar zijn lemma is <a href="http://bengdb.beeldengeluid.nl/95024"><code>bengdb.beeldengeluid.nl/95024</code></a>.</p>
+
+            <h2>Uit welke bronnen is de BengDB samengesteld?</h2>
+            <p>De BengDB maakt gebruik van ondermeer deze bronnen:</p>
+            <ul>
+                <li><a href="https://nl.wikipedia.org/wiki/Hoofdpagina">Wikipedia</a></li>
+                <li><a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a></li>
+                <li><a href="http://beeldengeluidwiki.nl/index.php/Hoofdpagina">Beeld en Geluidwiki</a></li>
+                <li><a href="http://in.beeldengeluid.nl/">In Beeld en Geluid</a></li>
+            </ul>
+
+            <h2>Heeft de BengDB een API?</h2>
+            <p>Elk lemma is ook op te vragen als <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> door simpelweg <code>.json</code> achter de URL te plakken. Bijvoorbeeld: <a href="http://bengdb.beeldengeluid.nl/95024">André van Duin als lemma</a>, <a href="http://bengdb.beeldengeluid.nl/95024.json">André van Duin als JSON</a>.</p>
+
+            <p>Op die manier zou je bijvoorbeeld een plug-in kunnen bouwen waarmee je op andere sites ook data uit de BengDB kan laten zien. Hieronder zie je een video van hoe zoiets eruit zou kunnen zien op een site als <a href="http://in.beeldengeluid.nl">In Beeld en Geluid</a>:</p>
+
+            <video src="{{root}}/media/bengdb-inbg.mp4" width="100%" controls style="border: 1px solid black;"></video>
+
+            <p><small>Bovenstaand voorbeeld kun je zelf uitproberen met de <a href="https://github.com/beeldengeluid/bengdb-frontend/tree/master/extension">(zeer) experimentele Chrome plugin</a></small>.</p>
+
+            <h2>Wie heeft de BengDB ontwikkeld?</h2>
+            <p>De BengDB is ontwikkeld door <a href="http://www.haykranen.nl">Hay Kranen</a> met input van Maarten Brinkerink, Johan Oomen en Victor de Boer. De volledige broncode is onder een open licentie te vinden op <a href="https://github.com/beeldengeluid/bengdb-frontend">Github</a>.</p>
+
+            <h2>Kan ik de data van de BengDB hergebruiken?</h2>
+            <p>Jazeker, met een paar kleine uitzonderingen. Alle tekst en afbeeldingen, <strong>met uitzondering van de foto's uit de collecties van Beeld en Geluid</strong> (die je kan vinden onder de knop 'Foto's' bij een deel van de lemma's) mag je hergebruiken onder de termen van de <a href="http://creativecommons.org/licenses/by-sa/3.0/nl/">Creative Commons Naamsvermelding-Gelijkdelen 3.0 licentie</a>. De data zoals je die kan vinden onder de knop 'Detailinformatie' zijn <a href="https://creativecommons.org/publicdomain/zero/1.0/">publiek domein</a>.</p>
+
+            <h2>Wat kan ik nog meer met de zoekfunctie?</h2>
+            <p>Behalve op naam kun je ook direct zoeken op GTAA en Wikidata-nummer. Probeer bijvoorbeeld eens te zoeken op <code>71522</code> of <code>Q912988</code>.</p>
+
+            <h2>Wat moet ik doen als ik een fout vind?</h2>
+            <p>Feitelijke onjuiste informatie kun je aanpassen op de bronsite (bijvoorbeeld Wikipedia of de Beeld en Geluidwiki). Deze informatie is dan in principe binnen een week ook hier bijgewerkt.</p>
+            <p>Functionele problemen (bugs) op de site kun je melden via <a href="https://github.com/beeldengeluid/bengdb-frontend/issues">Github</a> of eventueel mailen naar <a href="mailto:hkranen@beeldengeluid.nl">hkranen@beeldengeluid.nl</a>. Dit is een onderzoeksproject zonder actieve ondersteuning, dus we kunnen niet alle problemen op korte termijn oplossen.</p>
+
+            <h2>Is er nog ruimte voor verbetering?</h2>
+            <p>Jazeker! Hier is een lijstje met dingen die we nog zouden willen toevoegen:</p>
+            <ul>
+                <li>Koppeling met de (openbare) video en audiobestanden via <a href="http://in.beeldengeluid.nl">In Beeld en Geluid</a>.</li>
+                <li>Overzichtspagina's op basis van eigenschappen van personen (alle mensen die geboren zijn in Utrecht bijvoorbeeld).</li>
+                <li>Koppeling met de andere GTAA-'assen', zoals de titelas.</li>
+                <li>Koppeling met de <a href="http://nl.muziekencyclopedie.nl/">Muziekencyclopedie</a>.</li>
+                <li>Snellere verwerking van veranderingen in de data dan een week.</li>
+                <li>Integratie van BengDB-data in andere B&amp;G sites.</li>
+                <li>Holografische mode met Oculus-rift ondersteuning. Nee, grapje.</li>
+            </ul>
+
+            <h2>Ik heb een andere vraag of een opmerking.</h2>
+            <p>Stuur een mailtje naar <a href="mailto:hkranen@beeldengeluid.nl">hkranen@beeldengeluid.nl</a> of een tweet naar <a href="https://twitter.com/intent/tweet?text=@hayify">@hayify</a>.</p>
+
+            <h2>Ik heb nog meer vragen!</h2>
+            <p>Hieronder vind je een presentatie met de nitty-gritty.</p>
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.slideshare.net/slideshow/embed_code/key/8MxSnOpaOx4ACD"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'navbar-footer.html' %}
+{% include 'footer.html' %}

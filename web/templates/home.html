@@ -9,8 +9,7 @@
 
         <div class="col-md-8 col-md-offset-2 buffer-top-2 text-center">
             <p class="lead">
-                Welkom bij de Beeld en Geluid Database (BengDB). Op deze site vind je uitgebreide
-                visuele informatie over meer dan {{itemCount | number_format}} personen uit de Nederlandse televisiegeschiedenis. Zoek of selecteer een van de uitgelichte
+                Welkom bij de Beeld en Geluid Database (BengDB), een visuele encyclopedie over de personen in Nederlandse televisiegeschiedenis, samengesteld uit meerdere open(bare) bronnen.<br>Zoek op naam of selecteer een van de uitgelichte
                 personen.
             </p>
         </div>
@@ -73,6 +72,12 @@
         </div>
     </div>
     {% endif %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 buffer-4 text-center">
+            <a class="btn btn-trans" href="{{root}}/about">Over de BengDB</a>
+        </div>
+    </div>
 </div>
 
 {% include 'footer.html' %}

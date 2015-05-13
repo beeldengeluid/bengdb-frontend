@@ -20,19 +20,28 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
+                {% if template != "about" %}
+                <li>
+                    <a href="{{root}}/about">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Over BengDB
+                    </a>
+                </li>
+
                 <li>
                     {% if lang == "nl" %}
                     <a href="{{fullurl}}?lang=en">
                         <span class="glyphicon glyphicon-flag"></span>
-                        Read in English
+                        In English
                     </a>
                     {% else %}
                     <a href="{{fullurl}}?lang=nl">
                         <span class="glyphicon glyphicon-flag"></span>
-                        Lees in het Nederlands
+                        In het Nederlands
                     </a>
                     {% endif %}
                 </li>
+                {% endif %}
 
                 <li>
                     <form action="{{rootSlashed}}" class="navbar-form navbar-right" method="get" role="search">

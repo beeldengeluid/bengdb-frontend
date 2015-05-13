@@ -1,20 +1,24 @@
 {% include 'header.html' %}
 
-<div class="container-fluid container-fill-item">
-    <h1>Sorry.</h1>
+<div class="container container-fill-item">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <h1>Sorry.</h1>
 
-    <p class="lead">
-        {% if errorCode == 500 %}
-            Er ging iets fout met het laden van deze pagina. Dat is niet jouw fout.
-        {% elseif errorCode == 400 %}
-            Er klopt iets niet met je URL. Check of het wel klopt.
-        {% elseif errorCode == 404 %}
-            <img src="{{root}}/img/barrie.gif"><br>
-            Deze pagina kan niet worden gevonden.
-        {% else %}
-            Er ging iets fout, maar we weten niet wat. Sorry, dat is het beste wat we er van kunnen maken.
-        {% endif %}
-    </p>
+            <p class="lead">
+                {% if errorCode == 500 %}
+                    Er ging iets fout met het laden van deze pagina. Dat is niet jouw fout.
+                {% elseif errorCode == 400 %}
+                    Er klopt iets niet met je URL. Check of het wel klopt.
+                {% elseif errorCode == 404 %}
+                    <img src="{{root}}/img/barrie.gif"><br>
+                    Deze pagina kan niet worden gevonden (404).
+                {% else %}
+                    Er ging iets fout, maar we weten niet wat. Sorry, dat is het beste wat we er van kunnen maken.
+                {% endif %}
+            </p>
+        </div>
+    </div>
 </div>
 
 {% include 'navbar-footer.html' %}

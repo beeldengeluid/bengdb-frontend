@@ -57,7 +57,10 @@ class Item extends Page  {
         }
 
         $this->item->enriched = true;
-        $this->setTitle($this->item->labels);
+
+        if (isset($this->item->labels)) {
+            $this->setTitle($this->item->labels);
+        }
     }
 
     // Hairy code!
