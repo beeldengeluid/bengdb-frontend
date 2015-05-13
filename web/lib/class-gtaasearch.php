@@ -50,7 +50,7 @@ class GtaaSearch {
     }
 
     public static function search($q) {
-        $q = strtolower($q);
+        $q = trim(strtolower($q));
 
         return ORM::for_table(self::TABLE)
             ->where_like('lookup', "%$q%")

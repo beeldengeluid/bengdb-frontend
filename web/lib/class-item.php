@@ -8,10 +8,12 @@ class Item extends Page  {
 
     function __construct($id, $type) {
         parent::__construct();
+
         $this->fullurl = sprintf("%s/%s", $this->root, $id);
         $this->pageType = $this->getPageType();
         $this->randomItems = GtaaSearch::getRandomItems();
         $this->itemType = $type;
+        $this->id = $id;
 
         if ($type == "wikidata") {
             $this->qid = $id;
@@ -38,6 +40,7 @@ class Item extends Page  {
             }
 
             $this->qid = $gtaadata->wikidata;
+            $this->gtaa = $id;
         }
 
         $this->wditem = new WikidataItem($this->qid, $this->lang);

@@ -30,6 +30,22 @@
         $app->stop();
     }
 
+    function renderJson($data) {
+        global $app;
+
+        $app->response->headers->set('Content-Type', 'application/json');
+        $app->response->headers->set('Access-Control-Allow-Origin', '*');
+        $data = json_encode($data);
+
+        if (!$data) {
+            $data = json_encode(['error' => 'JSON encoding error']);
+        }
+
+        echo $data;
+
+        $app->stop();
+    }
+
     function getItem($id) {
         $type = Util::getIdType($id);
 
@@ -50,7 +66,7 @@
         return new Item($id, $type);
     }
 
-    function renderPage($id, $format = "html") {
+    function renderItem($id, $format = "html") {
         global $app, $renderer;
 
         try {
@@ -92,7 +108,7 @@
         }
 
         if ($format == "json") {
-            echo json_encode($item);
+            renderJson($item);
         } else {
             render($item->getPageType(), $item);
         }
@@ -115,14 +131,30 @@
         }
     });
 
+    $app->get("/api/search", function() use ($app) {
+        $q = $app->request->get('q');
+
+        if (!$q) {
+            renderJson(['error' => "Query is required"]);
+        }
+
+        $result = GtaaSearch::search($q);
+
+        if (empty($result)) {
+            renderJson(["error" => "No results"]);
+        }
+
+        $id = $result[0]['gtaa'];
+        renderItem($id, "json");
+    });
+
     $app->get("/:id.json", function($id) use ($app) {
-        $app->response->headers->set('Content-Type', 'application/json');
-        renderPage($id, "json");
+        renderItem($id, "json");
     });
 
     // Conventional URLS
     $app->get("/:id", function($id) {
-        renderPage($id);
+        renderItem($id);
     });
 
     $app->run();

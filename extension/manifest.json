@@ -1,0 +1,27 @@
+{
+    "manifest_version": 2,
+    "name": "BengDB Enricher",
+    "description": "Add in-site information from the BengDB to a selection of Sound and Vision websites.",
+    "version": "1.0",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.beeldengeluid.nl/*"
+            ],
+            "css": [
+                "vendor/tooltipster.css",
+                "vendor/tooltipster-light.css"
+            ],
+            "js": [
+                "vendor/jquery.js",
+                "vendor/async.js",
+                "vendor/tooltipster.js",
+                "app.js"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "icon-16.png",
+        "128": "icon-128.png"
+    }
+}
