@@ -11,7 +11,7 @@ require dirname(__FILE__) . '/../web/bootstrap.php';
 use \Httpful\Request;
 
 define('WDQ_URL', "http://wdq.wmflabs.org/api?q=CLAIM[1741]");
-define('WIKIDATA_URL', "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=en|nl&format=json&props=aliases|labels|descriptions|claims&languagefallback=1");
+define('WIKIDATA_URL', "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=en|nl&format=json&props=aliases|labels|descriptions|claims&languagefallback=1");
 define('GTAA_ENDPOINT', 'http://data.beeldengeluid.nl/gtaa/%s.json');
 
 define('PROP_FIELDOFWORK', 'P101');
@@ -19,6 +19,7 @@ define('PROP_COUNTRYOFCITIZENSHIP', 'P27');
 define('PROP_OCCUPATION', 'P106');
 define('PROP_IMAGE', 'P18');
 define('PROP_DATEOFBIRTH', 'P569');
+define('PROP_DATEOFDEATH', 'P570');
 
 define('ITEM_ENTERTAINMENT', 'Q173799');
 define('ITEM_NETHERLANDS', 'Q55');
@@ -125,6 +126,23 @@ function fetchItems($items) {
     }
 }
 
+function addItemDate($item, $propid, $proplabel) {
+    $data = json_decode($item->data);
+
+    if (isset($data->claims->{$propid})) {
+        $date = $data->claims->{$propid}[0]->mainsnak->datavalue->value->time;
+        echo "Setting $proplabel to $date\n";
+
+        // Make sure fucking Cicero doesn't die in the year 2043
+        if ($date[0] == "-") {
+            $item->{$proplabel} = null;
+            return;
+        }
+
+        $item->{$proplabel} = Util::parseProlepticDate($date, ['dateonly' => true]);
+    }
+}
+
 function addMetadata() {
     echo "Now adding birthdate / image\n";
 
@@ -140,12 +158,10 @@ function addMetadata() {
             $item->image = $img;
         }
 
-        if (isset($data->claims->P569)) {
-            $date = $data->claims->P569[0]->mainsnak->datavalue->value->time;
-            $item->birthdate = Util::parseProlepticDate($date, ['dateonly' => true]);
-        }
+        addItemDate($item, PROP_DATEOFBIRTH, "birthdate");
+        addItemDate($item, PROP_DATEOFDEATH, "deathdate");
 
-        printf("Got %s/%s\n", $item->image, $item->birthdate);
+        printf("Got %s/%s/%s\n", $item->image, $item->birthdate, $item->deathdate);
 
         $item->save();
     }
@@ -160,7 +176,7 @@ function fetchNewItems() {
     echo "Got WDQ query\n";
 
     if (!isset($req->body->items)) {
-        die("Could not fetch items\n");
+        die("Could not fetch WDQ items\n");
     }
 
     $itemsToFetch = [];
@@ -171,11 +187,11 @@ function fetchNewItems() {
 
         if ((bool) $item) {
             // $item is in the database
-            print "$qid is in the database\n";
+            echo "$qid is in the database\n";
             continue;
         }
 
-        print "$qid is NOT in the database\n";
+        echo "$qid is NOT in the database\n";
         $itemsToFetch[] = $qid;
 
         // If we have 50 items (the limit for the API), fetch and add to db
