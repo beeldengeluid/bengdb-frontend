@@ -85,9 +85,13 @@
                             <dd>
                                 <a href="http://www.wikidata.org/wiki/{{item.id}}">{{item.id}}</a>
                             </dd>
-                        {% for claim in item.claims %}
+                        {% for claim in item.claims if claim.property_id != "P31" %}
                             <dt>
-                                {{claim.property_labels}}<br>
+                                {% if claim.property_id == "P21" %}
+                                    geslacht<br>
+                                {% else %}
+                                    {{claim.property_labels}}<br>
+                                {% endif %}
                             </dt>
 
                             <dd>
