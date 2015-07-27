@@ -49,8 +49,21 @@ class GtaaSearch {
         ];
     }
 
+    public static function lookupPublicDomainPeople() {
+        $fromyear = date("Y") - 70;
+
+        return ORM::for_table(self::TABLE)
+            ->where_lt('deathdate', "$fromyear-01-01")
+            ->find_array();
+    }
+
     public static function search($q) {
         $q = trim(strtolower($q));
+
+        // This is a bit of a hack really
+        if ($q == "pd70") {
+            return self::lookupPublicDomainPeople();
+        }
 
         return ORM::for_table(self::TABLE)
             ->where_like('lookup', "%$q%")

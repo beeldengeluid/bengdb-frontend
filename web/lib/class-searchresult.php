@@ -4,7 +4,7 @@ class SearchResult extends Page {
 
     function __construct($q) {
         parent::__construct();
-        $this->q = $q;
+        $this->q = trim($q);
         $this->isSearch = true;
         $this->searchresults = GtaaSearch::search($q);
     }
