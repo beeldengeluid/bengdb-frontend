@@ -12,7 +12,7 @@ use \Httpful\Request;
 
 define('WDQ_URL', "http://wdq.wmflabs.org/api?q=CLAIM[1741]");
 define('WIKIDATA_URL', "https://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=en|nl&format=json&props=aliases|labels|descriptions|claims&languagefallback=1");
-define('GTAA_ENDPOINT', 'http://data.beeldengeluid.nl/gtaa/%s.json');
+define('GTAA_ENDPOINT', 'http://openskos.beeldengeluid.nl/gtaa/%s.json');
 
 define('PROP_FIELDOFWORK', 'P101');
 define('PROP_COUNTRYOFCITIZENSHIP', 'P27');
