@@ -8,6 +8,7 @@
     define('DB_DATABASE', 'bengdb');
     define('DB_USER', 'root');
     define('DB_PASS', 'root');
+    define('TIMEZONE', 'Europe/Amsterdam');
 
     class Config {
         public static $primaryLanguages = [

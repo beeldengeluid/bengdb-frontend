@@ -9,6 +9,8 @@
     require ABSPATH . '/version.php';
     require ABSPATH . '/vendor/autoload.php';
 
+    date_default_timezone_set(TIMEZONE);
+
     // Setup autoloading
     spl_autoload_register(function ($name) {
         $filename = ABSPATH . strtolower("/lib/class-$name.php");
