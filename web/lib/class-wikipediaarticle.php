@@ -79,7 +79,7 @@ class WikipediaArticle {
             $article->firstimage = !empty($article->images) ? $article->images[0] : false;
         }
 
-        if (isset($article->text)) {
+        if (defined('LOOKUP_LINKS') && LOOKUP_LINKS && isset($article->text)) {
             $article->text = $this->addLinks($article->text);
             $related = array_map("GtaaSearch::getPrettyItemById", $this->related);
             $article->related = array_values(array_filter($related));
