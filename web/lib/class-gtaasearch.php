@@ -3,7 +3,7 @@ use \Httpful\Request;
 
 class GtaaSearch {
     const TABLE = "combined";
-    const GTAA_ENDPOINT = "http://data.beeldengeluid.nl/gtaa/%s.json";
+    const GTAA_ENDPOINT = "http://openskos.beeldengeluid.nl/gtaa/%s.json";
 
     public static function getPrettyItemById($id) {
         $item = self::lookupCombined($id);
@@ -36,7 +36,7 @@ class GtaaSearch {
         }
 
         $scheme = str_replace(
-            "http://data.beeldengeluid.nl/gtaa/",
+            "http://openskos.beeldengeluid.nl/gtaa/",
             "",
             reset($req->inScheme)
         );
