@@ -1,0 +1,42 @@
+@mixin respond-from($min) {
+    @media (min-width: $min) {
+        @content;
+    }
+}
+
+@mixin respond-until($max) {
+    @media (max-width: $max - 1) {
+        @content;
+    }
+}
+
+@mixin respond-between($min, $max) {
+    @media (min-width: $min) and (max-width: $max - 1) {
+        @content;
+    }
+}
+
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin pos($coords...) {
+    @if length($coords) == 1 {
+        top: nth($coords, 1);
+        right: nth($coords, 1);
+        bottom: nth($coords,1);
+        left: nth($coords, 1);
+    } @else {
+        top: nth($coords, 1);
+        right: nth($coords, 2);
+        bottom: nth($coords, 3);
+        left: nth($coords, 4);
+    }
+}
+
+@mixin center-flex {
+    @include display-flex;
+    @include justify-content(center);
+    @include align-items(center);
+}
